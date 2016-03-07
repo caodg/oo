@@ -1,4 +1,4 @@
-all: gen copy
+#all: gen copy
 
 gen:
 	gitbook build

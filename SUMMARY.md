@@ -1,5 +1,5 @@
 # Summary
 
 * [首页](README.md)
-* [讲义](slides.md)
-* [资料](refs.md)
+* [课程安排](schedule.md)
+* [参考资料](refs.md)
