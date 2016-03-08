@@ -5,9 +5,15 @@
 
 #### 2016年3月10日
 
-
+* [Requirement](https://en.wikipedia.org/wiki/Requirement) and [Requirement Engineering](https://en.wikipedia.org/wiki/Requirements_engineering)
+  - [Requirement elicitation](https://en.wikipedia.org/wiki/Requirements_elicitation)
+  - [Requirement analysis](https://en.wikipedia.org/wiki/Requirements_analysis)
+  - [Systems modeling](https://en.wikipedia.org/wiki/Systems_modeling)
+* [Verification and validation](https://en.wikipedia.org/wiki/Verification_and_validation)
+* Wikipedia [Use case](https://en.wikipedia.org/wiki/Use_case), <a href="https://en.wikipedia.org/wiki/Scenario_(computing)">Scenario (computing)</a>
 
 #### 2016年3月3日
+
 
 * [David Parnas](https://en.wikipedia.org/wiki/David_Parnas) 关于[modular design](https://en.wikipedia.org/wiki/Modular_design)中模块应该 **high** <a href="https://en.wikipedia.org/wiki/Cohesion_(computer_science)">cohesion</a> 和 **loose** <a href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)">coupling</a> 的思想, 
 以及 [Information Hiding](https://en.wikipedia.org/wiki/Information_hiding), 见于论文 [On the Criteria To Be Used in Decomposing Systems into Modules](http://www.cs.umd.edu/class/spring2003/cmsc838p/Design/criteria.pdf)
@@ -17,6 +23,7 @@
 
 #### 2016年2月25日
 
+* Wikipedia [Progrmming Paradigm](https://en.wikipedia.org/wiki/Programming_paradigm),  various programming paradigms [overviews graph](images/Programming_paradigms.svg)
 * Wikipedia [Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)
 * Wikipedia [Object--orientation](https://en.wikipedia.org/wiki/Object-orientation)
 * [维特根斯坦](https://en.wikipedia.org/wiki/Ludwig_Wittgenstein)的[逻辑哲学论](https://zh.wikipedia.org/wiki/逻辑哲学论)，没有证据表明OO和逻辑哲学论有直接关联，但这本书的思想和风格有可能对你看待程序设计和软件开发有所启发
