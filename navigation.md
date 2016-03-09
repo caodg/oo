@@ -8,4 +8,6 @@
 
 [Schedule](schedule.md)
 
+[Assignment](hw.md)
+
 [Readings](refs.md)
