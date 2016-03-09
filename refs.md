@@ -11,6 +11,7 @@
   - [Systems modeling](https://en.wikipedia.org/wiki/Systems_modeling)
 * [Verification and validation](https://en.wikipedia.org/wiki/Verification_and_validation)
 * Wikipedia [Use case](https://en.wikipedia.org/wiki/Use_case), <a href="https://en.wikipedia.org/wiki/Scenario_(computing)">Scenario (computing)</a>
+* 谭云杰, 大象：Thinking in UML(第2版), 中国水利水电出版社, 2012. 第8-10章
 
 #### 2016年3月3日
 

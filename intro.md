@@ -102,8 +102,6 @@
 
 - 邵维忠, 麻志毅, 马浩海, 刘辉(译). UML 用户指南(第 2 版). 人民 邮电出版社, 2006 年 6 月. (Booch G., Rumbaugh J. and Jacobson I. The United Modeling Language User Guide. New York: Addison-Wesley Publishing Company, 2005)
 
-- 谭云杰, 大象：Thinking in UML(第2版), 中国水利水电出版社, 2012
-
 ----
 
 
