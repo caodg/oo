@@ -9,6 +9,3 @@
 [Schedule](schedule.md)
 
 [Readings](refs.md)
-
-[gimmick:theme](flatly)
-
