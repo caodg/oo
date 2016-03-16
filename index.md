@@ -17,7 +17,7 @@
 
 助教: 
 
-- 安博 (anbo14 AT pku.edu.cn ) 
+- 安博 (anbo AT pku.edu.cn ) 
 - 刘凯 (liu.kai AT pku.edu.cn )
 
 ----
