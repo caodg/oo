@@ -7,6 +7,7 @@
 
 * [OOSC-2: HOW TO FIND THE CLASSES](https://archive.eiffel.com/doc/manuals/technology/oosc/finding/page.html),  taken from chapter 22 of the book *Object-Oriented Software Construction*, second edition, Prentice Hall, 1997
 * [OBJECT-ORIENTED ANALYSIS](http://www.umsl.edu/~sauterv/analysis/ooa.html), KEY CONCEPTS, BENEFITS AND CRITICISMS, by Prof. Vicki Sauter, November 29, 1999
+* [Interface vs Base class](http://stackoverflow.com/questions/56867/interface-vs-base-class), a discussion at stackoverflow
 
 
 #### 2016年3月10日
