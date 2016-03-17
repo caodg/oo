@@ -3,6 +3,12 @@
 
 ----
 
+#### 2016年3月17日
+
+* [OOSC-2: HOW TO FIND THE CLASSES](https://archive.eiffel.com/doc/manuals/technology/oosc/finding/page.html),  taken from chapter 22 of the book *Object-Oriented Software Construction*, second edition, Prentice Hall, 1997
+* [OBJECT-ORIENTED ANALYSIS](http://www.umsl.edu/~sauterv/analysis/ooa.html), KEY CONCEPTS, BENEFITS AND CRITICISMS, by Prof. Vicki Sauter, November 29, 1999
+
+
 #### 2016年3月10日
 
 * [Requirement](https://en.wikipedia.org/wiki/Requirement) and [Requirement Engineering](https://en.wikipedia.org/wiki/Requirements_engineering)
@@ -38,3 +44,6 @@
 
 * Lawrence krubner 批判 OOP 的一篇长文 [Object Oriented Programming is an expensive disaster which must
  end](http://www.smashcompany.com/technology/object-oriented-programming-is-an-expensive-disaster-which-must-end)（真的非常长，但值得仔细阅读）
+* [Arguments Against Oop](http://c2.com/cgi/wiki?ArgumentsAgainstOop) , Summary of Criticisms Against OO
+* [Oop Arguments Debates And Discussion](http://c2.com/cgi/wiki?OopArgumentsDebatesAndDiscussion)
+
