@@ -8,12 +8,7 @@
 * [OOSC-2: HOW TO FIND THE CLASSES](https://archive.eiffel.com/doc/manuals/technology/oosc/finding/page.html),  taken from chapter 22 of the book *Object-Oriented Software Construction*, second edition, Prentice Hall, 1997
 * [OBJECT-ORIENTED ANALYSIS](http://www.umsl.edu/~sauterv/analysis/ooa.html), KEY CONCEPTS, BENEFITS AND CRITICISMS, by Prof. Vicki Sauter, November 29, 1999
 * [Interface vs Base class](http://stackoverflow.com/questions/56867/interface-vs-base-class), a discussion at stackoverflow
-* <a href="https://msdn.microsoft.com/library/ms229013(v=vs.100).aspx">Choosing
-  Between Classes and Interfaces</a>, MSDN的技术文档，建议多用 Abstract
-  Class: *While both abstract classes and interfaces support separating
-  contract from implementation, interfaces cannot specify new members in
-  later versions while abstract classes can add members as needed to
-  support additional functionality.*
+* <a href="https://msdn.microsoft.com/library/ms229013(v=vs.100).aspx">Choosing Between Classes and Interfaces</a>, MSDN的技术文档，建议多用 Abstract Class: *While both abstract classes and interfaces support separating contract from implementation, interfaces cannot specify new members in later versions while abstract classes can add members as needed to support additional functionality.*
 
 
 #### 2016年3月10日
