@@ -3,6 +3,17 @@
 
 ----
 
+#### 2016年3月24日
+
+- <a href="https://en.wikipedia.org/wiki/Interface_(computing)">Interface</a>
+- <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)">Inheritance(OOP)</a>
+- [Subtyping](https://en.wikipedia.org/wiki/Subtyping)
+- <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">Polymorphism</a>
+- [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)
+- [Mixin](https://en.wikipedia.org/wiki/Mixin)
+- [Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle)
+- [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance)
+
 #### 2016年3月17日
 
 * [OOSC-2: HOW TO FIND THE CLASSES](https://archive.eiffel.com/doc/manuals/technology/oosc/finding/page.html),  taken from chapter 22 of the book *Object-Oriented Software Construction*, second edition, Prentice Hall, 1997
