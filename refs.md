@@ -3,6 +3,17 @@
 
 ----
 
+#### 2016年4月7日
+
+- <a href="https://en.wikipedia.org/wiki/Concurrency_(computer_science)">Concurrency</a> at Wikipedia
+- [Messaging Pattern](https://en.wikipedia.org/wiki/Messaging_pattern) at Wikipedia
+- [AllanKay on Messaging](http://c2.com/cgi/wiki?AlanKayOnMessaging) , AlanKay的一封信，他表示OO的要点不在Object, 而在于Message -- ** The big idea is "messaging" - that is what the kernal of Smalltalk/Squeak is all about (and it's something that was never quite completed in our Xerox PARC phase). **
+- [这篇博文](http://alexsquest.com/texts/the-talking-objects-a-tale-about-message-oriented-programming)介绍了Rails设计中的对象和消息, 也引用了AlanKay关于Message的观点 -- ** To Kay, what's important is the relationships between objects, and that the real abstraction is in the messages, not the objects. **
+- [Erlang](http://www.erlang.org) 是一个支持[Actor模型](https://en.wikipedia.org/wiki/Actor_model)的编程语言. Wikipedia上也有关于Erlang的介绍: ** Concurrency and distribution orientation ** of <a href="https://en.wikipedia.org/wiki/Erlang_(programming_language)">Erlang at Wikipedia</a>
+- [Akka](http://akka.io)是一个开源的并发编程框架, 支持Actor模型 
+- 流行消息框架或消息中间件: [ActiveMQ](http://activemq.apache.org), [RabbitMQ](https://www.rabbitmq.com), [ØMQ](http://zeromq.org), [Kafka](http://kafka.apache.org)
+
+
 #### 2016年3月24日
 
 - <a href="https://en.wikipedia.org/wiki/Interface_(computing)">Interface</a>
