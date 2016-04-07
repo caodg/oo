@@ -20,6 +20,11 @@
 - 安博 (anbo AT pku.edu.cn )
 - 刘凯 (liu.kai AT pku.edu.cn )
 
+大作业服务系统:
+
+- 燕云( http://yancloud.pku.edu.cn/ )，IaaS 云服务器
+- Docklet (http://iwork.pku.edu.cn)，云工作台，可在线进行数据分析
+
 ----
 
 <!--
@@ -29,3 +34,6 @@
 
 Note:
 [大作业](hw.md#大作业) 发布. Mar 31, 2016
+
+
+
