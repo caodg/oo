@@ -22,8 +22,8 @@
 
 大作业服务系统:
 
-- 燕云( http://yancloud.pku.edu.cn/ )，IaaS 云服务器
-- Docklet (http://iwork.pku.edu.cn)，云工作台，可在线进行数据分析
+- 燕云: http://yancloud.pku.edu.cn/, IaaS 云服务器
+- Docklet: http://iwork.pku.edu.cn, 云工作台, 可在线进行数据分析. [Docklet](http://docklet.unias.org) 是我们开发的一个开源项目
 
 ----
 
