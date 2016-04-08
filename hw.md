@@ -69,6 +69,8 @@
 5 | 曹兴超| caoxingchao AT pku.edu.cn | 校园图书漂流系统 | 一个二手图书共享平台
 6 | 张舒汇 | zhangshuhui AT pku.edu.cn | 志愿树系统 | 一个方便志愿者参与志愿活动的平台
 
+每个题目限20人选，在 http://course.pku.edu.cn 上自由选择加入。外校同学请给助教发信加入。
+
 所有题目详情请见这里
 
 ### 题目１麦得劳汉堡套餐系统
