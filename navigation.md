@@ -11,3 +11,5 @@
 [Assignment](hw.md)
 
 [Readings](refs.md)
+
+[Discuss](discuss.html)
