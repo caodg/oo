@@ -1,3 +1,3 @@
 all:
 	mkdocs build --clean
-	rsync -r --delete site/* /var/www/html/
+	rsync -r --delete site/* /export/home/caodg/public_html/course/oo/
