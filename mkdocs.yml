@@ -8,14 +8,13 @@ pages:
 - Schedule: schedule.md
 - Assignments: 
   - 作业1: hw1.md
-  - 项目与技术报告: 
-    - Intro: hw-proj.md
-    - Task1: hw-proj-1.md
-    - Task2: hw-proj-2.md
-    - Task3: hw-proj-3.md
-    - Task4: hw-proj-4.md
-    - Task5: hw-proj-5.md
-    - Task6: hw-proj-6.md
+  - 项目与技术报告: hw-proj.md
+  - _Task1: hw-proj-1.md
+  - _Task2: hw-proj-2.md
+  - _Task3: hw-proj-3.md
+  - _Task4: hw-proj-4.md
+  - _Task5: hw-proj-5.md
+  - _Task6: hw-proj-6.md
 - Readings: refs.md
 - Discuss: discuss.md
 
