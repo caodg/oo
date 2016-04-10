@@ -1,7 +1,3 @@
-#all: gen copy
-
-gen:
-	gitbook build
-
-copy:
-	scp -r _book/* caodg@nis:~/public_html/course/oo
+all:
+	mkdocs build --clean
+	rsync -r --delete site/* /var/www/html/

@@ -1,0 +1,31 @@
+site_name: OO Course
+site_author: "Donggang Cao"
+site_description: "OO Analysis and Design"
+
+pages:
+- Home: index.md
+- Intro: intro.md
+- Schedule: schedule.md
+- Assignment: 
+  - Assignments: hw.md
+  - Hw1Pair: hw1-pair.md
+- Readings: refs.md
+- Discuss: discuss.md
+
+copyright: "&#169; <a href='http://sei.pku.edu.cn/~caodg/'>Donggang Cao</a>"
+
+include_next_prev: False
+
+theme_dir: custom_theme
+
+extra_css:
+ - css/extra.css
+
+extra:
+  site_url: "http://sei.pku.edu.cn/~caodg" 
+
+markdown_extensions:
+ - nl2br
+ - admonition
+
+dev_addr: 127.0.0.1:9090
