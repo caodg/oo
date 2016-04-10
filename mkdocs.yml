@@ -6,9 +6,16 @@ pages:
 - Home: index.md
 - Intro: intro.md
 - Schedule: schedule.md
-- Assignment: 
-  - Assignments: hw.md
-  - Hw1Pair: hw1-pair.md
+- Assignments: 
+  - 作业1: hw1.md
+  - 项目与技术报告: 
+    - Intro: hw-proj.md
+    - Task1: hw-proj-1.md
+    - Task2: hw-proj-2.md
+    - Task3: hw-proj-3.md
+    - Task4: hw-proj-4.md
+    - Task5: hw-proj-5.md
+    - Task6: hw-proj-6.md
 - Readings: refs.md
 - Discuss: discuss.md
 
