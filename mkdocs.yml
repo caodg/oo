@@ -8,7 +8,8 @@ pages:
 - Schedule: schedule.md
 - Assignments: 
   - 作业1: hw1.md
-  - 项目与技术报告: hw-proj.md
+  - 技术报告: hw-report.md
+  - 项目: hw-proj.md
   - _Task1: hw-proj-1.md
   - _Task2: hw-proj-2.md
   - _Task3: hw-proj-3.md
