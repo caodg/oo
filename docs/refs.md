@@ -6,6 +6,7 @@
 #### 2016年4月14日
 
 - [UML](http://www.uml-diagrams.org)的版本历史，每个版本的特点，各种[建模示例](http://www.uml-diagrams.org/index-examples.html)均可在此找到，具有重要的参考价值
+- UML 绘图工具[大全](https://en.wikipedia.org/wiki/List_of_Unified_Modeling_Language_tools)，其中有一些较为小巧的如 [yED](https://www.yworks.com/products/yed), [UMLet](http://www.umlet.com) 等可做漂亮的工作
 - 目前UML工具中比较流行的是在线画图工具，如[draw.io](https://www.draw.io)
 - 一些建模工具使用文本(如Markdown格式)描述图形，然后将文本编译生成图形。典型的是 [PlantUML](http://plantuml.com), [yUML](http://yuml.me), [Mermaid](http://knsv.github.io/mermaid/)，等
 - [SDL](https://en.wikipedia.org/wiki/Specification_and_Description_Language)(Specification and Description Language)是一个广泛应用于电信领域，可对分布式系统和反应式系统进行精确建模的语言
