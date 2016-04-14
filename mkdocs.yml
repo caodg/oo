@@ -23,6 +23,8 @@ copyright: "&#169; <a href='http://sei.pku.edu.cn/~caodg/'>Donggang Cao</a>"
 
 include_next_prev: False
 
+theme: flatly
+
 theme_dir: custom_theme
 
 extra_css:
