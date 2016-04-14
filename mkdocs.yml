@@ -7,6 +7,7 @@ pages:
 - Intro: intro.md
 - Schedule: schedule.md
 - Assignments: 
+  - 作业2: hw2.md
   - 作业1: hw1.md
   - 技术报告: hw-report.md
   - 项目: hw-proj.md
