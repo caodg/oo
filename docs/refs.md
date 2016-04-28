@@ -3,6 +3,15 @@
 
 ----
 
+#### 2016年4月28日
+
+- [What is the difference between a process and a thread](http://stackoverflow.com/questions/200469/what-is-the-difference-between-a-process-and-a-thread)
+- [Parallel programming model](https://en.wikipedia.org/wiki/Parallel_programming_model)
+- [Architectural pattern](https://en.wikipedia.org/wiki/Architectural_pattern)
+- [List of software architecture styles and patterns](https://en.wikipedia.org/wiki/List_of_software_architecture_styles_and_patterns)
+- [Object database](https://en.wikipedia.org/wiki/Object_database)
+- [NoSQL database](https://en.wikipedia.org/wiki/NoSQL)
+
 #### 2016年4月14日
 
 - [UML](http://www.uml-diagrams.org)的版本历史，每个版本的特点，各种[建模示例](http://www.uml-diagrams.org/index-examples.html)均可在此找到，具有重要的参考价值
