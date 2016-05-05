@@ -3,6 +3,12 @@
 
 ----
 
+#### 2016年5月5日
+
+- Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides. Design Patterns: Elements of Reusable Object-oriented Software. Addison Wesley Longman. 1995
+- Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra. Head First Design Patterns. O’Reilly Media. Oct 2004
+<img src="../images/headfirstdpcover.jpg" style="width:200px"/>
+
 #### 2016年4月28日
 
 - [What is the difference between a process and a thread](http://stackoverflow.com/questions/200469/what-is-the-difference-between-a-process-and-a-thread)
