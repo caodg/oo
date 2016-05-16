@@ -3,6 +3,11 @@
 
 ----
 
+#### 2016年5月19日
+
+- 一个游戏玩家对[一个游戏的事件驱动设计的分析](http://www.iplaymtg.com/thread-210198-1-1.html)
+
+
 #### 2016年5月5日
 
 - Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides. Design Patterns: Elements of Reusable Object-oriented Software. Addison Wesley Longman. 1995
