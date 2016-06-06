@@ -35,11 +35,13 @@
 
 **各个小组作业展示**
 
-\# |  题目  | 作业下载链接
--- | ----- | --------
-1 | [麦得劳汉堡套餐系统](hw-proj-1.md) | [一个个性化汉堡定制系统](http://data.educationcloud.cn/owncloud/s/Kc5Sw3MeOrEPVu5)
-2 | [餐厅点餐系统](hw-proj-2.md) | [一个完整的、符合餐厅需求的点餐系统](http://data.educationcloud.cn/owncloud/s/5of2DB9YYqLE132)
-3 | [互助平台](hw-proj-3.md) | [一个大家能寻求帮助与提供帮助的平台](http://data.educationcloud.cn/owncloud/s/lBCGbgCFkgDEFke)
-4 | [麻将游戏](hw-proj-4.md) | [一个较完善的麻将对战平台](http://data.educationcloud.cn/owncloud/s/yFONizYwbp24Z9w)
-5 | [校园图书漂流系统](hw-proj-5.md) | [一个二手图书共享平台](http://data.educationcloud.cn/owncloud/s/vpJ0tkudwzkb4QO)
-6 | [志愿树系统](hw-proj-6.md) | [一个方便志愿者参与志愿活动的平台](http://data.educationcloud.cn/owncloud/s/vpJ0tkudwzkb4QO)
+下载密码为：oo
+
+\# |  各组作业下载链接  |
+-- | ----- |
+1 | [麦得劳汉堡套餐系统](http://data.educationcloud.cn/owncloud/s/Kc5Sw3MeOrEPVu5)
+2 | [餐厅点餐系统](http://data.educationcloud.cn/owncloud/s/5of2DB9YYqLE132)
+3 | [互助平台](http://data.educationcloud.cn/owncloud/s/lBCGbgCFkgDEFke)
+4 | [麻将游戏](http://data.educationcloud.cn/owncloud/s/yFONizYwbp24Z9w)
+5 | [校园图书漂流系统](http://data.educationcloud.cn/owncloud/s/vpJ0tkudwzkb4QO)
+6 | [志愿树系统](http://data.educationcloud.cn/owncloud/s/vpJ0tkudwzkb4QO)
