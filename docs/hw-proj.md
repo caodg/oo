@@ -43,5 +43,5 @@
 2 | [餐厅点餐系统](http://data.educationcloud.cn/owncloud/s/5of2DB9YYqLE132)
 3 | [互助平台](http://data.educationcloud.cn/owncloud/s/lBCGbgCFkgDEFke)
 4 | [麻将游戏](http://data.educationcloud.cn/owncloud/s/yFONizYwbp24Z9w)
-5 | [校园图书漂流系统](http://data.educationcloud.cn/owncloud/s/vpJ0tkudwzkb4QO)
+5 | [校园图书漂流系统](http://data.educationcloud.cn/owncloud/s/GSjGyWynOr2JDNf)
 6 | [志愿树系统](http://data.educationcloud.cn/owncloud/s/vpJ0tkudwzkb4QO)
