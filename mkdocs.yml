@@ -6,20 +6,11 @@ pages:
 - Home: index.md
 - Intro: intro.md
 - Schedule: schedule.md
-- Assignments: 
-  - 作业3: hw3.md
-  - 作业2: hw2.md
-  - 作业1: hw1.md
-  - 技术报告: hw-report.md
-  - 项目: hw-proj.md
-  - _Task1: hw-proj-1.md
-  - _Task2: hw-proj-2.md
-  - _Task3: hw-proj-3.md
-  - _Task4: hw-proj-4.md
-  - _Task5: hw-proj-5.md
-  - _Task6: hw-proj-6.md
+- Assignment: assign.md
+- Project: hw-proj.md
+- _Proj2016: proj-2016.md
+- _Report2016: report-2016.md
 - Readings: refs.md
-- Discuss: discuss.md
 
 copyright: "&#169; <a href='http://sei.pku.edu.cn/~caodg/'>Donggang Cao</a>"
 
