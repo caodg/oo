@@ -3,7 +3,7 @@
 
 序号 | 时间  |  内容 | 课件  | 作业
 -- | --- | ---------- | -- | ----
-01 | 2017年2月23日 | 课程介绍 | [ PDF](slides/chap00.pdf) |
+01 | 2017年2月23日 | 课程介绍 | [ PDF](slides/chap00.pdf) | [作业1](assign.md#assign1)
  |  | 面向对象方法概论 | [ PDF](slides/chap01.pdf) |
 
 <!--
