@@ -1,0 +1,9 @@
+\beamer@sectionintoc {1}{认识对象}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{定义}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{形成}{10}{0}{1}
+\beamer@sectionintoc {2}{基本概念}{18}{0}{2}
+\beamer@subsectionintoc {2}{1}{核心}{20}{0}{2}
+\beamer@subsectionintoc {2}{2}{其他}{48}{0}{2}
+\beamer@sectionintoc {3}{历史现状}{51}{0}{3}
+\beamer@subsectionintoc {3}{1}{起源}{52}{0}{3}
+\beamer@subsectionintoc {3}{2}{发展}{55}{0}{3}

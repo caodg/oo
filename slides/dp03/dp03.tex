@@ -1,0 +1,1146 @@
+\documentclass[compress]{beamer}
+
+\usepackage[nofonts]{ctex}
+\setCJKmainfont[ItalicFont={Kaiti SC}]{Kaiti SC}%
+%\setCJKmainfont[ItalicFont={AR PL KaitiM GB}]{AR PL KaitiM GB}%
+%\setCJKsansfont{WenQuanYi Zen Hei}% 文泉驿的黑体
+
+\mode<beamer>
+{
+     \useinnertheme{rectangles}
+     %\useoutertheme{infolines}
+     %\useoutertheme{split}
+     \usecolortheme{rose}
+     \usecolortheme{seahorse}
+
+     \setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+%     \expandafter\def\expandafter\insertshorttitle\expandafter{%
+%     \insertshorttitle\hfill%
+%     \insertframenumber\,/\,\inserttotalframenumber}
+}
+
+\defbeamertemplate*{footline}{mytheme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=1.0\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \raisebox{-1ex}{\includegraphics[width=3ex]{Overlays/logo.pdf}}%
+    \hspace*{6ex}\insertframenumber{} / \inserttotalframenumber 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\usebeamertemplate{mytheme}
+
+\setbeamertemplate{headline}{}
+
+%\setbeamercovered{transparent}
+
+\mode<handout>
+{
+	\usetheme{default}
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,landscape,border shrink=5mm]
+}
+
+
+\usepackage{amsmath,latexsym,amssymb,amsfonts,amsbsy}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{textpos}
+\usepackage{ulem}
+\usepackage{comment}
+\usepackage{fancyvrb}
+\fvset{frame=single, numbers=left, fontsize=\small}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta, graphs, trees, shapes, positioning, decorations.markings, intersections, decorations.text}
+\usepackage{tikz-uml}
+
+\newcommand{\romannumber}[1]{{\textrm{\uppercase\expandafter{\romannumeral
+#1}}}}
+
+\newcommand{\textblue}[1]{\textcolor{blue}{#1}}
+
+\setbeamercolor{dblue}{fg=white,bg=gray!70!blue} % for beamercolorbox
+ \newenvironment{pblock}{\begin{beamercolorbox}[rounded=true,
+          shadow=false]{dblue}}{\end{beamercolorbox}}
+ \newenvironment{bblock}{\begin{beamercolorbox}[rounded=true,
+          shadow=false]{fg=black, bg=white}}{\end{beamercolorbox}}
+
+\graphicspath{{figure/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    body                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%\AtBeginSubsection[]
+\AtBeginSection[]
+{ 
+    \begin{frame}<beamer> 
+		\frametitle{内容提要} 
+		\tableofcontents[currentsection,currentsubsection] 
+	\end{frame} 
+} 
+
+					
+\title[工厂模式]{面向对象设计模式 ~~ 工厂}
+
+\author[曹东刚]
+{曹东刚\\\href{mailto:caodg@pku.edu.cn}{caodg@pku.edu.cn}}
+
+\institute[北京大学]{北京大学信息学院研究生课程 - 面向对象的分析与设计 \\
+    \href{http://sei.pku.edu.cn/~caodg/course/oo}{http://sei.pku.edu.cn/\~{}caodg/course/oo}}
+
+\date{}
+
+\titlegraphic{\includegraphics[height=0.10\textwidth]{Overlays/logo.pdf}}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\setcounter{framenumber}{0}
+
+%\includeonlyframes{current}
+
+\section{简单工厂}
+
+\begin{frame}[fragile]
+  \frametitle{new 操作符的问题}
+  \verb~Duck duck = new MallardDuck() ;~ \\
+  当使用 \alert{new} 操作符实例化对象时，是在实例化具体类，所以是针对实
+  现编程，而不是针对接口编程，会使代码\uline{缺乏弹性}  \\[3ex]
+\begin{Verbatim}[label=使用大量具体类而难以更新和维护的代码]
+  Duck duck;
+  if (picnic) {
+    duck = new MallardDuck();
+  } else if (hunting) {
+    duck = new DecoyDuck();
+  } else if (inBathTub) {
+    duck = new RubberDuck();
+  }
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{怎么办？}
+到OO设计原则中寻找答案：\\[2ex]
+\begin{block}{设计原则: 封装变化性}
+    找出应用中可能需要变化之处, 把它们独立出来, 不要和那些不需要变化
+    的代码混在一起。 \\
+    即: 系统中的某部分改变不要影响其他部分。
+\end{block}
+
+\vspace*{3ex}
+如何将实例化具体类的代码抽离或封装起来？
+
+\end{frame}
+
+{
+\defverbatim{\verbpizzanew}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=订购Pizza的代码, commandchars=\\\[\]]
+Pizza orderPizza() {
+  \uline[Pizza pizza = new Pizza()];
+
+  pizza.prepare(); 
+  pizza.bake(); 
+  pizza.cut(); 
+  pizza.box(); 
+  return pizza;
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verborderpizza}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=根据Pizza的类型实例化具体类, commandchars=\\\[\]]
+Pizza orderPizza(String type) { 
+  Pizza pizza;
+  \textblue[if (type.equals("cheese")) { ]
+  \textblue[  pizza = new CheesePizza();]
+  \textblue[} else if (type.equals("greek") { ]
+  \textblue[  pizza = new GreekPizza();]
+  \textblue[} else if (type.equals("pepperoni") { ]
+  \textblue[  pizza = new PepperoniPizza();]
+  \textblue[}]
+
+  pizza.prepare();
+  // the following procedure is the same as the previous
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verborderpizzamore}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=但随后需要增加和删除某些Pizza, commandchars=\\\[\]]
+Pizza orderPizza(String type) { 
+  Pizza pizza;
+  if (type.equals("cheese")) { 
+    pizza = new CheesePizza();
+  } \sout[else if (type.equals("greek") { ]
+    \sout[pizza = new GreekPizza();]
+  \sout[}] else if (type.equals("pepperoni") { 
+    pizza = new PepperoniPizza();
+  }\textblue[ else if (type.equals("clam") { ]
+  \textblue[  pizza = new ClamPizza();]
+  \textblue[} else if (type.equals("veggie") { ]
+  \textblue[  pizza = new VeggiePizza();]
+  \textblue[}]
+\end{Verbatim}
+}
+
+
+\defverbatim[colored]{\verborderpizzaseal}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=将创建对象代码移出orderPizza, commandchars=\\\[\]]
+Pizza orderPizza(String type) { 
+  Pizza pizza;
+
+  \framebox[ 将创建对象代码从此处移走 \quad]
+  
+  pizza.prepare(); 
+  pizza.bake(); 
+  pizza.cut(); 
+  pizza.box(); 
+  return pizza;
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbsimpfactory}{%
+  \renewcommand{\baselinestretch}{1.2}
+\begin{Verbatim}[label=将创建具体对象的代码放到一个工厂类里, commandchars=\\\[\]]
+public class SimplePizzaFactory {
+  \textblue[public Pizza createPizza(String type) {]
+    Pizza pizza = null;
+    if (type.equals("cheese")) { 
+      pizza = new CheesePizza();
+    } else if (type.equals("pepperoni")) { 
+      pizza = new PepperoniPizza();
+    } else if (type.equals("clam")) {
+      pizza = new ClamPizza();
+    } else if (type.equals("veggie")) {
+      pizza = new VeggiePizza(); 
+    }
+￼   return pizza; 
+  \textblue[}]
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbstore}{%
+  %\renewcommand{\baselinestretch}{1.2}
+\begin{Verbatim}[label=重新实现PizzaStore, commandchars=\\\[\]]
+public class PizzaStore {
+  \textblue[SimplePizzaFactory factory;]
+
+  \textblue[public PizzaStore(SimplePizzaFactory factory) { ]
+  \textblue[  this.factory = factory;]
+  \textblue[}]
+
+  public Pizza orderPizza(String type) { 
+    Pizza pizza;
+    \textblue[pizza = factory.createPizza(type);]
+    pizza.prepare();
+    //the following procedure is the same as the previous
+\end{Verbatim}
+}
+\begin{frame}
+\frametitle{识别变化的方面：从一个Pizza店应用开始}
+  \only<1> {
+    \verbpizzanew
+
+    为了让系统有弹性，将Pizza设计为抽象类，但这样就无法实例化各种具体的Pizza类。因此需要增加代码来决定创建何种Pizza
+  }
+
+  \only<2> {
+    \verborderpizza
+  }
+  \only<3> {
+    \verborderpizzamore
+  }
+  \only<4> {
+    \verborderpizzaseal
+  }
+  \only<5> {
+  \vspace*{2ex}
+    \verbsimpfactory
+  }
+  \only<6> {
+    \verbstore
+  }
+\end{frame}
+}
+
+\begin{frame}
+\frametitle{简单工厂类下的Pizza店新类图}
+\noindent\begin{tikzpicture}
+\tikzumlset{fill class=white}
+
+\umlclass{SimplePizzaFactory}{}{createPizza()}
+\umlclass[x=-4.5]{PizzaStore}{}{orderPizza()}
+\umlclass[x=4.5, type=abstract]{Pizza}{}{prepare()\\
+  bake() \\
+  cut() \\
+  box() }
+
+\umlsimpleclass[x=0, y=-2]{CheesePizza}
+\umlsimpleclass[x=0.5, y=-3]{ViggiePizza}
+\umlsimpleclass[x=2, y=-4]{ClamPizza}
+\umlsimpleclass[x=4, y=-3]{PepperoniPizza}
+
+\umluniassoc{PizzaStore}{SimplePizzaFactory}
+\umluniassoc{SimplePizzaFactory}{Pizza}
+
+\umlinherit{CheesePizza}{Pizza}
+\umlinherit{ViggiePizza}{Pizza}
+\umlinherit{ClamPizza}{Pizza}
+\umlinherit{PepperoniPizza}{Pizza}
+
+\end{tikzpicture}
+\end{frame}
+
+\section{工厂方法}
+
+\begin{frame}
+\frametitle{加盟Pizza店}
+很多Pizza店希望能成为我们的加盟店，他们应使用我们现有的OO代码。
+但是这些加盟店希望提供\uline{不同风味}的Pizza\\[3ex]
+
+\begin{tikzpicture}
+\node (PizzaStore) at (0,0) [shape=circle,minimum size=1.5cm, draw] {复用}; 
+\draw[decoration={text along path, raise=-3pt, text={PizzaStore},
+  text align={left}},decorate] (-1,0) arc(180:360:1 and 1) ;
+
+\node (NYFactory) at (5,1.5) [shape=circle,fill=orange!80, minimum size=1.5cm, draw] {定制}; 
+\draw[decoration={text along path, raise=-3pt, text={NYPizzaFactory},
+  text align={center}},decorate] (4,1.5) arc(180:360:1 and 1);
+
+\node (LAFactory) at (5,-1.5) [shape=circle,fill=cyan!20, minimum size=1.5cm, draw] {定制}; 
+\draw[decoration={text along path, raise=-3pt, text={LAPizzaFactory},
+  text align={center}},decorate] (4,-1.5) arc(180:360:1 and 1);
+
+\draw [->, thick] (PizzaStore.north east) to [bend left=30] (NYFactory.west) ; 
+\draw [->, thick] (PizzaStore.south east) to [bend right=30] (LAFactory.west) ; 
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{各加盟店不同的工厂类}
+\begin{Verbatim}[label=纽约风味的工厂]
+NYPizzaFactory nyFactory = new NYPizzaFactory(); 
+PizzaStore nyStore = new PizzaStore(nyFactory); 
+nyStore.order("Veggie");
+\end{Verbatim}
+
+\vspace*{2ex}
+\begin{Verbatim}[label=洛杉矶风味的工厂]
+LAPizzaFactory laFactory = new LAPizzaFactory(); 
+PizzaStore laStore = new PizzaStore(laFactory); 
+laStore.order("Veggie");
+\end{Verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{既有严格控制，又允许灵活性}
+SimpleFactory工厂很容易被各加盟店采用，但他们只是利用SimpleFactory创建对象，自顾自地定义了自己的Pizza加工流程：例如使用第三方包装，忘记将Pizza切分，等等\\[2ex]
+
+因此，我们需要的是一个\uline{框架}，将Pizza店和Pizza创建\uline{绑定}到一起，并允许一定的\uline{灵活性}\\[2ex]
+
+方法：取消独立的工厂类，在PizzaStore中设立一个\uline{工厂方法}
+\end{frame}
+
+\begin{frame}
+\frametitle{让子类决定如何创建对象}
+\begin{tikzpicture}
+\tikzumlset{fill class=white}
+\umlclass[type=abstract]{PizzaStore}{}{\umlvirt{createPizza()} \\ orderPizza()}
+
+\umlclass[y=-4]{NYStylePizzaStore}{}{createPizza()}
+\umlclass[x=5, y=-4]{LAStylePizzaStore}{}{createPizza()}
+
+\umlinherit{NYStylePizzaStore}{PizzaStore}
+\umlVHVinherit{LAStylePizzaStore}{PizzaStore}
+
+\umlnote[x=5, width=5cm]{PizzaStore}{每个子类都重载createPizza()方法，并调用orderPizza()方法。可以将orderPizza()设置为final的，以防止子类重载}
+\end{tikzpicture}
+\end{frame}
+
+{
+\defverbatim[colored]{\verbnypizzastore}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=纽约地区的PizzaStore, commandchars=\\\[\]]
+public class NYPizzaStore extends PizzaStore { 
+  \alert[Pizza createPizza(String item)] {
+    if (item.equals("cheese")) {
+      return new NYStyleCheesePizza();
+    } else if (item.equals("veggie")) { 
+      return new NYStyleVeggiePizza();
+    } else if (item.equals("clam")) { 
+      return new NYStyleClamPizza();
+    } else if (item.equals("pepperoni")) { 
+      return new NYStylePepperoniPizza();
+    } else return null; 
+  }
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbpizzastore}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=PizzaStore, commandchars=\\\[\]]
+public abstract class PizzaStore {
+  \textblue[public final Pizza orderPizza(String type) ]{ 
+    Pizza pizza;
+    pizza = createPizza(type);
+    pizza.prepare(); 
+    pizza.bake(); 
+    pizza.cut(); 
+    pizza.box();
+    return pizza; 
+  }
+  \alert[protected abstract Pizza createPizza(String type);]
+  // other methods here 
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbpizza}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[fontsize=\small, label=Pizza, commandchars=\\\[\]]
+public abstract class Pizza { 
+  String name;
+  String dough;
+  String sauce;
+  ArrayList toppings = new ArrayList();
+  void prepare() {
+    System.out.println("Preparing " + name); 
+    System.out.println("Tossing dough..."); 
+    System.out.println("Adding sauce..."); 
+    System.out.println("Adding toppings: "); 
+    for (int i = 0; i < toppings.size(); i++) {
+      System.out.println(" " + toppings.get(i)); 
+    } 
+  }
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbpizzab}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[firstnumber=last, fontsize=\small,xrightmargin=-3pt,  
+label=Pizza, commandchars=\\\[\]]
+  void bake() {
+    System.out.println("Bake for 25 minutes at 350");
+  }
+
+  void cut() {
+    System.out.println("Cutting the pizza into diagonal slices");
+  }
+
+  void box() {
+    System.out.println("Place pizza in official PizzaStore box");
+  }
+
+  public String getName() { return name; } 
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verblapizza}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=定义具体的Pizza子类, commandchars=\\\[\]]
+public class LAStyleCheesePizza extends Pizza { 
+  public LAStyleCheesePizza() {
+    name = "LA Style Deep Dish Cheese Pizza"; 
+    dough = "Extra Thick Crust Dough";
+    sauce = "Plum Tomato Sauce";
+    toppings.add("Shredded Mozzarella Cheese"); 
+  }
+
+  \alert[void cut()] {
+    System.out.println("Cutting the pizza into 
+      square slices");
+  } 
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbclient}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=测试]
+public class PizzaTestDrive {
+  public static void main(String[] args) {
+    PizzaStore nyStore = new NYPizzaStore(); 
+
+    Pizza pizza = nyStore.orderPizza("cheese"); 
+    System.out.println("Ethan ordered a " + 
+      pizza.getName() + "\n");
+  }
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verboutput}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=输出结果]
+%java PizzaTestDrive
+Preparing NY Style Sauce and Cheese Pizza 
+Tossing dough...
+Adding sauce...
+Adding toppings:
+    Grated Regiano cheese
+Bake for 25 minutes at 350
+Cutting the pizza into diagonal slices
+Place pizza in official PizzaStore box
+Ethan ordered a NY Style Sauce and Cheese Pizza
+%
+\end{Verbatim}
+}
+
+\begin{frame}
+\frametitle{采用工厂方法的新设计}
+  \only<1> {
+    \vspace*{1ex}
+  \verbpizzastore
+  }
+  \only<2> {
+    \vspace*{1ex}
+  \verbnypizzastore
+  }
+  \only<3> {
+    \vspace*{1ex}
+  \verbpizza
+  }
+  \only<4> {
+  \verbpizzab
+  }
+  \only<5> {
+  \vspace*{2ex}
+  \verblapizza
+  }
+  \only<6> {
+  \verbclient
+  }
+  \only<7> {
+  \verboutput
+  }
+\end{frame}
+}
+
+\begin{frame}
+  \frametitle{认识工厂方法模式(Factory Method Pattern)}
+  \only<1> {
+    \begin{tikzpicture}
+      \tikzumlset{fill class=white}
+
+      \umlclass[type=abstract]{PizzaStore}{}{\umlvirt{createPizza()} \\
+    orderPizza() }
+
+    \umlclass[x=-3, y=-4]{NYPizzaStore}{}{createPizza()}
+    \umlclass[x=3, y=-4]{LAPizzaStore}{}{createPizza()}
+    \umlinherit{NYPizzaStore}{PizzaStore}
+    \umlinherit{LAPizzaStore}{PizzaStore}
+
+    \umlnote[x=4]{PizzaStore}{创建者(Creator)类}
+    \end{tikzpicture}
+  }
+
+  \only<2> {
+    \noindent\begin{tikzpicture}
+      \tikzumlset{fill class=white}
+
+      \umlemptyclass[type=abstract]{Pizza}
+
+    \umlemptyclass[x=-3, y=-3]{NYStyleCheesePizza}
+    \umlemptyclass[x=-2.5, y=-4]{NYStylePeeperoniPizza}
+    \umlemptyclass[x=-2, y=-5]{NYStyleClamPizza}
+
+    \umlemptyclass[x=3, y=-3]{LAStyleCheesePizza}
+    \umlemptyclass[x=3.5, y=-4]{LAStylePeeperoniPizza}
+    \umlemptyclass[x=4, y=-5]{LAStyleClamPizza}
+
+    \umlinherit{NYStyleCheesePizza}{Pizza}
+    \umlinherit{LAStyleCheesePizza}{Pizza}
+    \umlnote[x=4]{Pizza}{产品(Product)类}
+    \end{tikzpicture}
+  }
+
+  \only<3> {
+    \noindent\scalebox{0.75}{
+    \begin{tikzpicture}
+      \tikzumlset{fill class=white}
+
+      \umlclass[type=abstract]{PizzaStore}{}{\umlvirt{createPizza()} \\
+    orderPizza() }
+      \umlclass[x=-1.5, y=-4]{NYPizzaStore}{}{createPizza()}
+      \umlclass[x=2, y=-4]{LAPizzaStore}{}{createPizza()}
+      \umlinherit{NYPizzaStore}{PizzaStore}
+      \umlinherit{LAPizzaStore}{PizzaStore}
+
+      \umlemptyclass[x=8, type=abstract]{Pizza}
+      \umlemptyclass[x=6, y=-4]{NYStyleCheesePizza}
+      \umlemptyclass[x=10.5, y=-4]{LAStyleCheesePizza}
+      \umlinherit{NYStyleCheesePizza}{Pizza}
+      \umlinherit{LAStyleCheesePizza}{Pizza}
+
+      \draw [-Stealth, thick, red] (LAPizzaStore.south) to [bend
+      right=30](LAStyleCheesePizza.south) ;
+
+      \draw [-Stealth, thick, red] (NYPizzaStore.south) to [bend
+      right=30](NYStyleCheesePizza.south) ;
+    \end{tikzpicture}
+  }
+  }
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{定义工厂方法模式(Factory Method Pattern)}
+
+  \only<1> {
+  \begin{block}{工厂方法模式}
+    定义了一个创建对象的接口，但由子类\uline{决定}要实例化的类是哪一个。工厂方法
+    让类把如何实例化对象交由子类决定
+  \end{block}
+
+  \begin{itemize}
+    \item 工厂方法模式能够封装具体类型的实例化
+    \item 所谓``\uline{由子类决定}''，并不是允许子类在运行时做决定，而是指在编写
+      创建者类时，不需要知道实际创建的产品是什么
+    \item 选择使用哪一个子类，自然就决定了实际创建的产品是什么
+  \end{itemize}
+}
+
+  \only<2> {
+    \begin{tikzpicture}
+      \tikzumlset{fill class=white}
+
+      \umlclass[type=abstract]{Creator}{}{factoryMethod() \\
+      anOperation() }
+      \umlclass[y=-4]{ConcreteCreator}{}{factoryMethod()}
+
+      \umlemptyclass[type=abstract, x=6]{Product}
+      \umlemptyclass[x=6, y=-4]{ConcreteProduct}
+      
+      \umlinherit{ConcreteProduct}{Product}
+      \umlinherit{ConcreteCreator}{Creator}
+
+      \umluniassoc{ConcreteCreator}{ConcreteProduct}
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{关于工厂方法模式的讨论}
+  \begin{itemize}[<+-|alert@+>] 
+    \item [Q:] 当只有一个ConcreteFactory的时候，还有必要采用工厂方法模
+  式吗？
+    \item [Q:] 工厂方法和创建者是否总是抽象的？
+    \item [Q:] 工厂方法的字符串参数总是必须的吗？传错了怎么办？
+    \item [Q:] 简单工厂和创建者这两种方法的区别是什么？
+    \item [Q:] 所谓的``工厂''究竟能带来什么好处？
+    \item [Q:] 为什么``工厂''方法里仍然使用了具体化的类来实例化对象？
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{最开始版本的PizzaStore中的对象依赖}
+  \noindent\begin{tikzpicture}
+    \tikzumlset{fill class=white}
+
+    \umlsimpleclass{PizzaStore}
+    \umlsimpleclass[x=-3, y=-1.7]{NYStyleCheesePizza}
+    \umlsimpleclass[x=-2.5, y=-3]{NYStyleVeggiePizza}
+    \umlsimpleclass[x=3, y=-1.7]{LAStyleCheesePizza}
+    \umlsimpleclass[x=2.5, y=-3]{LAStyleVeggiePizza}
+    \umlsimpleclass[x=-3, y=-4.3]{NYStylePepperoniPizza}
+    \umlsimpleclass[x=-2.5, y=-5.5]{NYStyleClamPizza}
+    \umlsimpleclass[x=3, y=-4.3]{LAStylePepperoniPizza}
+    \umlsimpleclass[x=2.5, y=-5.5]{LAStyleClamPizza}
+
+    \umluniassoc{PizzaStore}{NYStyleCheesePizza}
+    \umluniassoc{PizzaStore}{NYStyleVeggiePizza}
+    \umluniassoc{PizzaStore}{NYStylePepperoniPizza}
+    \umluniassoc{PizzaStore}{NYStyleClamPizza}
+    \umluniassoc{PizzaStore}{LAStyleCheesePizza}
+    \umluniassoc{PizzaStore}{LAStyleVeggiePizza}
+    \umluniassoc{PizzaStore}{LAStylePepperoniPizza}
+    \umluniassoc{PizzaStore}{LAStyleClamPizza}
+
+    \umlnote[x=-4, width=3.5cm]{PizzaStore}{被依赖的类有任何变化，它都要进行修改}
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{依赖反转原则}
+
+  应该尽量减少对具体类的依赖:
+
+  \begin{block}{设计原则: 依赖反转(Dependency Inversion Principle)}
+    依赖抽象，不要依赖具体类
+  \end{block}
+
+  比较：\\
+  \qquad \uline{对接口编程} \\[2ex]
+
+  启发：\\
+  \qquad 高层对象不应该依赖低层对象，双方都应依赖 \uline{抽象}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{应用依赖反转原则}
+  \noindent\begin{tikzpicture}
+    \tikzumlset{fill class=white}
+
+    \umlsimpleclass[y=1.2]{PizzaStore}
+    \umlsimpleclass[type=abstract, y=-0.2, fill=yellow!80]{Pizza}
+    \umlsimpleclass[x=-3, y=-1.7]{NYStyleCheesePizza}
+    \umlsimpleclass[x=-2.5, y=-3]{NYStyleVeggiePizza}
+    \umlsimpleclass[x=3, y=-1.7]{LAStyleCheesePizza}
+    \umlsimpleclass[x=2.5, y=-3]{LAStyleVeggiePizza}
+    \umlsimpleclass[x=-3, y=-4.3]{NYStylePepperoniPizza}
+    \umlsimpleclass[x=-2.5, y=-5.5]{NYStyleClamPizza}
+    \umlsimpleclass[x=3, y=-4.3]{LAStylePepperoniPizza}
+    \umlsimpleclass[x=2.5, y=-5.5]{LAStyleClamPizza}
+
+    \umluniassoc{PizzaStore}{Pizza}
+    \umluniassoc{NYStyleCheesePizza}{Pizza}
+    \umluniassoc{NYStyleVeggiePizza}{Pizza}
+    \umluniassoc{NYStylePepperoniPizza}{Pizza}
+    \umluniassoc{NYStyleClamPizza}{Pizza}
+    \umluniassoc{LAStyleCheesePizza}{Pizza}
+    \umluniassoc{LAStyleVeggiePizza}{Pizza}
+    \umluniassoc{LAStylePepperoniPizza}{Pizza}
+    \umluniassoc{LAStyleClamPizza}{Pizza}
+
+    \umlnote[x=4]{Pizza}{抽象类，一种抽象}
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{理解``反转'': 以PizzaStore为例}
+  \begin{itemize}[<+-|alert@+>] 
+    \item [架构师] 如果要实现一个PizzaStore系统，首先会想到什么？
+    \item [程序员] PizzaStore无非准备、烘烤、包装Pizza，所以要能生产
+      各种Pizza：CheesePizza, VeggiePizza, ClamPizza, 等等
+    \item [架构师] 没错。但就要了解各种具体的Pizza，进而对他们产生
+      依赖。所以不妨\uline{反过来想}，从Pizza着手，看能不能\uline{抽象}
+    \item [程序员] 那样的话，CheesePizza, VeggiePizza, ClamPizza都是Pizza，因此
+      他们应该共享一个\textit{Pizza}接口
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{理解``反转'': 以PizzaStore为例}
+  \begin{itemize}[<+-|alert@+>] 
+    \item [架构师] 对。\textit{Pizza}就是抽象。现在可以重新设计了
+    \item [程序员] 由于有了\textit{Pizza}抽象，所以可以据此设计
+      PizzaStore，使之不依赖于具体的Pizza类了
+    \item [架构师] 对。还需要一个工厂方法，来实例化各种具体的类。这
+      样不同的具体类就只依赖一个抽象的\textit{Pizza}，如此以来，该设计就把原来的依赖关系\uline{反转}了
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{帮助遵循依赖反转原则}
+  \begin{itemize}
+    \item 不要让变量持有具体类的引用
+      \begin{itemize}
+        \item 不要用new，用工厂方法
+      \end{itemize}
+    \item 不要让类派生自具体类
+      \begin{itemize}
+        \item 让类派生自\uline{抽象}(接口或抽象类)
+      \end{itemize}
+    \item 不要覆盖父类中已实现的方法
+      \begin{itemize}
+        \item 如果覆盖了父类已实现的方法，那么父类就不是一个真正适合被继
+          承的抽象。父类中已实现的方法，应该由所有的子类共享
+      \end{itemize}
+  \end{itemize}
+  \framebox{\parbox{\hsize}{\centering 完全遵循这三条是很困难的，但应有
+  意识尽量遵循}}
+\end{frame}
+
+\section{抽象工厂}
+
+\begin{frame}
+  \frametitle{PizzaStore新的需求}
+
+  \alert{问题}： \\
+  PizzaStore获得成功的一个重要原因是坚持使用新鲜、优质的原
+  料。但某些加盟店为了降低成本，偷偷使用低质廉价的原料，减少馅的用量。长
+  此以往必将对品牌造成伤害。 \\[3ex]
+  \textblue{需求}：\\
+  \uline{保证每家店用同样质量的原料}。可以设计一个工厂生产原料，然后发送
+  给各店 \\
+  \alert{另一个问题:} 不同店的相同名字的原料可能是两种东西，例如纽约和洛
+  杉矶的红酱料，所以需要配备几组不同的原料
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{原料家族}
+  \begin{tikzpicture}
+    \tikzumlset{fill class=white, fill package=white}
+    \begin{umlpackage}{New York}
+      \umlsimpleclass{MarinaraSauce}
+      \umlsimpleclass[y=-1]{FreshClams}
+      \umlsimpleclass[y=-2]{ReggianoCheese}
+      \umlsimpleclass[y=-3]{ThinCrustDough}
+    \end{umlpackage}
+    \begin{umlpackage}[x=5]{Los Angeles}
+      \umlsimpleclass{Calamari}
+      \umlsimpleclass[y=-1]{BruschettaSauce}
+      \umlsimpleclass[y=-2]{GoatCheese}
+      \umlsimpleclass[y=-3]{VeryThinCrust}
+    \end{umlpackage}
+  \end{tikzpicture}
+
+  \vspace*{2ex}
+  所有Pizza都由面团(dough)、酱料(sauce)、芝士(cheese)及若干佐料加工而成
+  ，不同店对这些原料的实现可能是不同的
+\end{frame}
+
+{
+\defverbatim[colored]{\verbingredientf}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=定义原料工厂接口, commandchars=\\\<\>]
+public interface PizzaIngredientFactory {
+  public Dough createDough();
+  public Sauce createSauce();
+  public Cheese createCheese(); 
+  public Veggies[] createVeggies(); 
+  public Pepperoni createPepperoni(); 
+  public Clams createClam();
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbnyingredientf}{%
+  %\renewcommand{\baselinestretch}{1.2}
+\begin{Verbatim}[label=纽约原料工厂部分代码, commandchars=\\\<\>]
+public class NYPizzaIngredientFactory 
+  implements PizzaIngredientFactory {
+  public Dough createDough() { 
+    return new ThinCrustDough();
+  }
+  public Veggies[] createVeggies() {
+    Veggies veggies[] = { new Garlic(), new Onion(), 
+        new Mushroom(), new RedPepper() }; 
+    return veggies;
+  }
+  public Pepperoni createPepperoni() { 
+    return new SlicedPepperoni();
+  }
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbpizza}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=新的Pizza类部分代码, commandchars=\\\^\$]
+public abstract class Pizza { 
+  String name;
+  Dough dough;
+  Sauce sauce; 
+  Veggies veggies[]; 
+  Cheese cheese; 
+  Pepperoni pepperoni; 
+  Clams clam;
+
+  //将准备原料的prepare方法声明为抽象的
+  \alert^abstract$ void prepare();
+\end{Verbatim}
+}
+
+
+
+\defverbatim[colored]{\verbpizzab}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[firstnumber=last, label=新的Pizza类部分代码，其他方法不变, commandchars=\\\^\$]
+  void bake() {
+    System.out.println("Bake for 25 minutes at 350");
+  }
+  void cut() {
+    System.out.println("Cutting the pizza into 
+      diagonal slices");
+  }
+  void box() {
+    System.out.println("Place pizza in official 
+      PizzaStore box");
+  }
+  // other methods such as setName, getName, toString
+}
+\end{Verbatim}
+}
+
+
+\defverbatim[colored]{\verbcheesepizza}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=不同风味的Pizza做法一样，原料不同, commandchars=\\\^\$]
+public class CheesePizza extends Pizza { 
+  PizzaIngredientFactory ingf;
+  public CheesePizza(PizzaIngredientFactory ingf) { 
+    this.ingf = inf;
+  }
+  \textblue^void prepare()$ {
+    System.out.println("Preparing " + name); 
+    dough = ingf.createDough(); 
+    sauce = ingf.createSauce(); 
+    cheese = ingf.createCheese();
+  } 
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbclampizza}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=多一种原料的另一种Pizza, commandchars=\\\^\$]
+public class ClamPizza extends Pizza { 
+  PizzaIngredientFactory ingf;
+  public ClamPizza(PizzaIngredientFactory ingf) { 
+    this.ingf = ingf;
+  }
+  \textblue^void prepare()$ { 
+    System.out.println("Preparing " + name); 
+    dough = ingf.createDough(); 
+    sauce = ingf.createSauce(); 
+    cheese = ingf.createCheese(); 
+    clam = ingf.createClam();
+  } 
+}
+\end{Verbatim}
+}
+
+\defverbatim[colored]{\verbnypizzastore}{%
+  %\renewcommand{\baselinestretch}{1.1}
+\begin{Verbatim}[label=使用了本地原料工厂的PizzaStore, commandchars=\\\^\$]
+public class NYPizzaStore extends PizzaStore {
+  \textblue^protected Pizza createPizza(String item)$ {
+    Pizza pizza = null; 
+    PizzaIngredientFactory ingf = 
+      new NYPizzaIngredientFactory(); 
+    if (item.equals("cheese")) {
+      pizza = new CheesePizza(ingredientFactory); 
+      pizza.setName("New York Style Cheese Pizza");
+    } else if (item.equals("veggie")) {
+      // 制造各种本地风味的Pizza
+    }
+}
+\end{Verbatim}
+}
+\begin{frame}
+  \frametitle{构建原料工厂}
+
+\only<1> {
+  \verbingredientf
+}
+
+\only<2> {
+  接下来需要
+  \begin{enumerate}
+    \item 为每个地区设计一个工厂类，实现PizzaIngredientFactory接口
+    \item 实现该PizzaFactory需要的各种原料类，如ReggianoCheese, RedPeppers等
+    \item 将新的原料工厂相关类和原有PizzaStore代码组合到一起
+  \end{enumerate}
+}
+
+\only<3> {
+  \vspace*{1ex}
+  \verbnyingredientf
+}
+
+\only<4> {
+  \verbpizza
+}
+
+\only<5> {
+  \vspace*{1ex}
+  \verbpizzab
+}
+
+\only<6> {
+  \vspace*{1ex}
+  \verbcheesepizza
+}
+
+\only<7> {
+  \vspace*{1ex}
+  \verbclampizza
+}
+
+\only<8> {
+  \vspace*{1ex}
+  \verbnypizzastore
+}
+\end{frame}
+}
+
+\begin{frame}
+\frametitle{这些代码有何效果？}
+\begin{itemize}
+\item 引入新类型的工厂，即\uline{抽象工厂}，来创建原料家族
+\item 通过抽象工厂提供的\uline{接口}，创建产品的代码将和实际工厂解耦，从而可以在不同上下文中实现不同工厂，制造不同产品
+\item 由于代码从实际的产品中解耦，所以可以\uline{替换}不同的工厂来取得不同的行为
+\item 客户代码始终\uline{保持不变}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{订购一个Pizza的顺序图}
+\noindent\scalebox{0.75}{
+\begin{tikzpicture}
+\begin{umlseqdiag}
+\umlobject{a}
+\umlcreatecall[class=NYPizzaStore]{a}{n}
+\begin{umlcall}[op=orderPizza("cheese")]{a}{n}
+  \begin{umlcallself}[op=createPizza("cheese")]{n}
+    \begin{umlcreatecall}[class=NYIngredientFactory]{n}{f}
+    \end{umlcreatecall}
+    \umlcreatecall[class=CheesePizza]{n}{p}
+  \end{umlcallself}
+  \begin{umlcall}[op=prepare()]{n}{p}
+    \begin{umlcall}[op=createDough()]{p}{f}
+    \end{umlcall}
+    \begin{umlcall}[op=createSauce()]{p}{f}
+    \end{umlcall}
+    \begin{umlcall}[op=createCheese()]{p}{f}
+    \end{umlcall}
+  \end{umlcall}
+  \begin{umlcall}[op=bake、cut、box]{n}{p}
+  \end{umlcall}
+\end{umlcall}
+\end{umlseqdiag}
+\end{tikzpicture}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{定义抽象工厂模式}
+
+\only<1> {
+\begin{block}{抽象工厂模式}
+抽象工厂模式提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类
+\end{block}
+
+抽象工厂允许客户使用抽象的接口来创建一组相关的产品，而不需要知道实际产出的具体产品是什么。如此一来，客户就从具体的产品中被\uline{解耦}
+}
+
+\only<2> {
+\noindent\hspace*{-2ex}\scalebox{0.8}{
+\begin{tikzpicture}
+\tikzumlset{fill class=white}
+
+\umlclass[type=interface]{AbstractFactory}{}{\umlvirt{createProductA()} \\
+\umlvirt{createProductB()}}
+\umlclass[y=3.5]{ConcreteFactoryA}{}{createProductA() \\
+createProductB()}
+\umlclass[y=-3.5]{ConcreteFactoryB}{}{createProductA() \\
+createProductB()}
+
+\umlimpl{ConcreteFactoryA}{AbstractFactory}
+\umlimpl{ConcreteFactoryB}{AbstractFactory}
+
+\umlsimpleclass[type=interface, x=7]{AbstractProductA}
+\umlsimpleclass[x=7, y=2.5]{ProductA1}
+\umlsimpleclass[x=7, y=-2.5]{ProductA2}
+\umlimpl{ProductA1}{AbstractProductA}
+\umlimpl{ProductA2}{AbstractProductA}
+
+\umlsimpleclass[type=interface, x=11]{AbstractProductB}
+\umlsimpleclass[x=11, y=2.5]{ProductB1}
+\umlsimpleclass[x=11, y=-2.5]{ProductB2}
+\umlimpl{ProductB1}{AbstractProductB}
+\umlimpl{ProductB2}{AbstractProductB}
+
+\umluniassoc[geometry=-|]{ConcreteFactoryA}{ProductA1}
+\umluniassoc[geometry=-|]{ConcreteFactoryA}{ProductB1}
+
+\umluniassoc[geometry=-|]{ConcreteFactoryB}{ProductA2}
+\umluniassoc[geometry=-|]{ConcreteFactoryB}{ProductB2}
+
+\umlsimpleclass[x=4, y=2.5]{Client}
+\umluniassoc{Client}{AbstractFactory}
+\umluniassoc{Client}{AbstractProductA}
+\umluniassoc{Client}{AbstractProductB}
+
+\end{tikzpicture}
+}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{从PizzaStore的观点看抽象工厂}
+
+\noindent\hspace*{-2ex}\scalebox{0.8}{
+\begin{tikzpicture}
+\tikzumlset{fill class=white}
+
+\umlclass[type=interface]{PizzaIngredientFactory}{}{\umlvirt{createDough()} \\
+\umlvirt{createSauce()}}
+\umlclass[y=-3.5]{NYPizzaIngredientFactory}{}{createDough() \\
+createSauce()}
+\umlclass[y=3.5]{LAPizzaIngredientFactory}{}{createDough() \\
+createSauce()}
+
+\umlimpl{NYPizzaIngredientFactory}{PizzaIngredientFactory}
+\umlimpl{LAPizzaIngredientFactory}{PizzaIngredientFactory}
+
+\umlsimpleclass[type=interface, x=6.8]{Dough}
+\umlsimpleclass[x=6.8, y=2.5]{ThickCrustDough}
+\umlsimpleclass[x=6.8, y=-2.5]{ThinCrustDough}
+\umlimpl{ThickCrustDough}{Dough}
+\umlimpl{ThinCrustDough}{Dough}
+
+\umlsimpleclass[type=interface, x=10.5]{Sauce}
+\umlsimpleclass[x=10.5, y=2.5]{PlumTomatoSauce}
+\umlsimpleclass[x=10.5, y=-2.5]{MarinaraSauce}
+\umlimpl{PlumTomatoSauce}{Sauce}
+\umlimpl{MarinaraSauce}{Sauce}
+
+\umluniassoc[geometry=-|]{LAPizzaIngredientFactory}{ThickCrustDough}
+\umluniassoc[geometry=-|]{LAPizzaIngredientFactory}{PlumTomatoSauce}
+
+\umluniassoc[geometry=-|]{NYPizzaIngredientFactory}{ThinCrustDough}
+\umluniassoc[geometry=-|]{NYPizzaIngredientFactory}{MarinaraSauce}
+
+\umlsimpleclass[x=3.8, y=2.5]{Client}
+\umluniassoc{Client}{PizzaIngredientFactory}
+\umluniassoc{Client}{Dough}
+\umluniassoc{Client}{Sauce}
+
+\end{tikzpicture}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{关于工厂模式的小结}
+\begin{itemize}
+\item 所有的工厂都是用来\uline{封装}对象的创建，
+\item 所有工厂模式都通过减少应用程序和具体类之间的依赖，促进\uline{松耦合}
+\item 简单工厂不是真正的模式，但常常\uline{简单}有效
+\item 工厂方法使用\uline{继承}
+\item 抽象工厂使用对象\uline{聚合}
+\item 依赖倒置原则指导我们编程时尽量\uline{依赖抽象}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{关于设计原则的小结}
+  \begin{enumerate}
+    \item 封装变化
+    \item 多用聚合、少用继承
+    \item 针对接口编程，不针对实现编程
+    \item 尽最大可能将要交互的对象设计为松耦合的
+    \item 对扩展开放，对修改封闭
+    \item 依赖抽象，不要依赖具体类
+  \end{enumerate}
+\end{frame}
+
+\end{document}
