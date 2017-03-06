@@ -447,27 +447,27 @@ shapes.geometric, shapes.multipart, patterns}
 
 {
 \defverbatim[colored]{\verbcase}{%
-   \renewcommand{\baselinestretch}{1.2}
+   \renewcommand{\baselinestretch}{1.1}
 \begin{Verbatim}[commandchars=\\\^\$, fontsize=\small, label=示例]
 \textbf^收款$
 
 输入开始本次收款的命令；
-            \textblue^作好收款准备，应收款总数置为0，输出提示信息；$
+        \textblue^作好收款准备，应收款总数置为0，输出提示信息；$
 for  顾客选购的每种商品 do
   输入商品编号；
   if  此种商品多于一件 then
     输入商品数量
   end if；
-            \textblue^检索商品名称及单价；货架商品数减去售出数；$
-            \textblue^if  货架商品数低于下限 then$
-                 \textblue^call 通知上货$
-            \textblue^end if；$
-            \textblue^计算本种商品总价并打印编号、名称、数量、单价、总价；$
-            \textblue^总价累加到应收款总数；$
+        \textblue^检索商品名称及单价；货架商品数减去售出数；$
+        \textblue^if  货架商品数低于下限 then$
+             \textblue^call 通知上货$
+        \textblue^end if；$
+        \textblue^计算本种商品总价并打印编号、名称、数量、单价、总价；$
+        \textblue^总价累加到应收款总数；$
 end for；
-            \textblue^打印应收款总数；$
+        \textblue^打印应收款总数；$
 输入顾客付款数；
-            \textblue^计算应找回款数，打印付款数及找回款，应收款数计入账册。$
+        \textblue^计算应找回款数，打印付款数及找回款，计入账册。$
 \end{Verbatim}
 }
 
