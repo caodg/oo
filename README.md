@@ -1,6 +1,6 @@
 # Object Oriented Analysis & Design
 
-Material for the postgraduate course **Object Oriented Analysis & Design** in Peking University.
+Material for the postgraduate course **[Object Oriented Analysis & Design](http://sei.pku.edu.cn/~caodg/course/oo)** in Peking University.
 
 Course website: generated using the open source **mkdocs** tools.
 
