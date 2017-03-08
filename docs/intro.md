@@ -91,15 +91,16 @@
 
 **教材**:
 
-- 邵维忠, 杨芙清. 面向对象的分析与设计. 清华大学出版社, 2013 年 1 月.  ISBN: 978-7-302-30120-2
+- 邵维忠, 杨芙清, 面向对象的分析与设计, 清华大学出版社, 2013 年 1 月,  ISBN: 978-7-302-30120-2
 
   ![邵维忠老师的《面向对象的分析与设计》](images/book.png "教材")
 
 
 **参考书**:
 
-- 徐家福(译), UML精粹：标准对象建模语言简明指南(第3版), 清华大学出版社, 2005年. Martin Fowler, UML Distilled: A Brief Guide to the Standard Object Modeling Language, Third Edition, 2003
+- 谭云杰, 大象 -- Thinking in UML(第二版), 中国水利水电出版社, 2012 年 3 月, ISBN: 978-7-5084-9234-6
 
-- 邵维忠, 麻志毅, 马浩海, 刘辉(译). UML 用户指南(第 2 版). 人民 邮电出版社, 2006 年 6 月. (Booch G., Rumbaugh J. and Jacobson I. The United Modeling Language User Guide. New York: Addison-Wesley Publishing Company, 2005)
+- Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra. Head First Design Patterns. O’Reilly Media. Oct 2004
+<img src="../images/headfirstdpcover.jpg" style="width:200px"/>
 
 ----
