@@ -5,11 +5,12 @@ site_description: "OO Analysis and Design"
 pages:
 - Home: index.md
 - Intro: intro.md
-- Schedule: schedule.md
 - Assignment: assign.md
 - Project: hw-proj.md
 - _Proj2016: proj-2016.md
 - _Report2016: report-2016.md
+- Schedule: schedule.md
+- Roster: roster.md
 - Readings: refs.md
 
 copyright: "&#169; <a href='http://sei.pku.edu.cn/~caodg/'>Donggang Cao</a>"
