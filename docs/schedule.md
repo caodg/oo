@@ -23,7 +23,7 @@
    |               | 读书报告: TiU Chap9.5-9.8 (王春柳) |
 06 | 2017年4月6日  | 需求分析 | [作业5](assign.md#assign5)
    |               | 读书报告: TiU Chap10 (昝妍) |
-   |               | 读书报告: OOAD Chap5 |
+   |               | 读书报告: OOAD Chap5 (梁晶晶) |
 08 | 2017年4月13日 | 系统分析 | [作业6](assign.md#assign6)
    |               | 读书报告: TiU Chap11 (马银萍) |
    |               | 读书报告: OOAD Chap6,7 (赖辉源) |
@@ -46,8 +46,8 @@
    |               | 命令模式: (孙熙然) |
    |               | 代理模式: (朱霆) |
    |               | 复合模式: (谭鑫) |
-15 | 2017年6月1日  | 软件框架 (4人)  |
-   |               | 前端: Bootstrap/jQuery |
+15 | 2017年6月1日  | 软件框架，如(4人)  |
+   |               | 前端: Bootstrap/jQuery (梁晶晶) |
    |               | Java: Struts/Spring/Hibernate (娄一翎) |
    |               | Python: Zope2/Web.py/Django/Tornado    |
    |               | Ruby: Rails  |
