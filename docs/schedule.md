@@ -30,7 +30,7 @@
    |               | 读书报告: OOAD Chap8 |
 09 | 2017年4月20日 | 系统设计 |
    |               | 读书报告: OOAD Chap11,14 (孙熙然)|
-   |               | 读书报告: TiU Chap12 |
+   |               | 读书报告: TiU Chap12 (娄一翎) |
    |               | 读书报告: TiU Chap16-22  |
 10 | 2017年4月27日 | 需求变更 | 
    |               | 第一轮开发验收与总结 | [作业7](assign.md#assign7)
@@ -48,7 +48,7 @@
    |               | 复合模式: (谭鑫) |
 15 | 2017年6月1日  | 软件框架 (4人)  |
    |               | 前端: Bootstrap/jQuery |
-   |               | Java: Struts/Spring/Hibernate|
+   |               | Java: Struts/Spring/Hibernate (娄一翎) |
    |               | Python: Zope2/Web.py/Django/Tornado    |
    |               | Ruby: Rails  |
    |               | .Net   |
