@@ -46,7 +46,7 @@
    |               | 命令模式: (孙熙然) |
    |               | 代理模式: (朱霆) |
    |               | 复合模式: (谭鑫) |
-15 | 2017年6月1日  | 软件框架，如(4人)  |
+15 | 2017年6月1日  | 软件框架，包括但不限于:  |
    |               | 前端: Bootstrap/jQuery (梁晶晶) |
    |               | Java: Struts/Spring/Hibernate (娄一翎) |
    |               | Python: Zope2/Web.py/Django/Tornado    |
