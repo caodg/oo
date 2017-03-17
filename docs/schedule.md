@@ -13,12 +13,12 @@
 04 | 2017年3月16日 | 案例讨论 | [作业2第二轮](assign.md#assign2)
    |               | 读书报告: TiU Chap1-2 (钟业弘) | [作业3](assign.md#assign3)
    |               | 读书报告: TiU Chap3 (孙鹏晖) |
-   |               | 读书报告: TiU Chap4 (李博远) |
 05 | 2017年3月23日 | 涉众分析 | [作业4](assign.md#assign4)
+   |               | 读书报告: TiU Chap4 (李博远) |
    |               | 读书报告: TiU Chap5 (温九) |
    |               | 读书报告: TiU Chap6 (朱霆) |
-   |               | 读书报告: TiU Chap8 (华晨彦) |
 07 | 2017年3月30日 | 需求获取 | 
+   |               | 读书报告: TiU Chap8 (华晨彦) |
    |               | 读书报告: TiU Chap9.1-9.4 (谭鑫) |
    |               | 读书报告: TiU Chap9.5-9.8 (王春柳) |
 06 | 2017年4月6日  | 需求分析 | [作业5](assign.md#assign5)
