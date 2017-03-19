@@ -16,6 +16,6 @@ E(B) | 1601214515  | _**马银萍**_| 1601214515 AT  pku.edu.cn	| [GitHub](https
   | 1601214481  | 昝妍	| 1601214481 AT  pku.edu.cn | [GitHub](https://github.com/Leftears/oo.git)
 F(A) | 1601111303  | _**来雨轩**_| 1601111303 AT  pku.edu.cn | [GitHub](https://github.com/Erutan-pku/oo)
   | F           | 赖辉源| huiyuanlai AT qq.com   | [GitHub](https://github.com/llandll/OO-Course)
-G(E) | F           | _**王春柳**_| 2385878750 AT qq.com    | [GitHub](https://github.com/wcl199343/OO-Course)
+G(F) | F           | _**王春柳**_| 2385878750 AT qq.com    | [GitHub](https://github.com/wcl199343/OO-Course)
   | F           | 孙熙然| sunxiran0505 AT 163.com   | [GitHub](https://github.com/JosephineSun)
 ? | 1501110193  | 张立涵| 1501110193 AT  pku.edu.cn | GitHub
