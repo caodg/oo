@@ -49,8 +49,8 @@
 15 | 2017年6月1日  | 软件框架，包括但不限于:  |
    |               | 前端: Bootstrap/jQuery (梁晶晶) |
    |               | Java: Struts/Spring/Hibernate (娄一翎) |
+   |               | Ruby: Rails (李博远)  |
    |               | Python: Zope2/Web.py/Django/Tornado    |
-   |               | Ruby: Rails  |
    |               | .Net   |
 16 | 2017年6月8日  | 总结    |
 17 | 2017年6月15日 | 考试周  <!--[Sample](slides/sample.pdf)--> |
