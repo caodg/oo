@@ -5,24 +5,19 @@ site_description: "OO Analysis and Design"
 pages:
 - Home: index.md
 - Intro: intro.md
+- History: 
+  - Proj2016: proj-2016.md
+  - Report2016: report-2016.md
 - Assignment: assign.md
-- Project: hw-proj.md
-- _Proj2016: proj-2016.md
-- _Report2016: report-2016.md
 - Schedule: schedule.md
 - Roster: roster.md
-- Readings: refs.md
 
 copyright: "&#169; <a href='http://sei.pku.edu.cn/~caodg/'>Donggang Cao</a>"
-
-include_next_prev: False
 
 repo_url: https://github.com/caodg/oo
 repo_name: GitHub
 
 theme: flatly
-
-theme_dir: custom_theme
 
 extra_css:
  - css/extra.css
