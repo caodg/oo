@@ -28,7 +28,7 @@
 09 | 2017年4月20日 | 系统分析 | [作业6](assign.md#assign6)
    |               | 读书报告: TiU Chap11 (马银萍) |
    |               | 读书报告: OOAD Chap6,7 (赖辉源) |
-   |               | 读书报告: OOAD Chap8 |
+   |               | 读书报告: OOAD Chap8 (温九) |
 10 | 2017年4月27日 | 系统设计 |
    |               | 读书报告: OOAD Chap11,14 (孙熙然)|
    |               | 读书报告: TiU Chap12 (娄一翎) |
@@ -50,10 +50,9 @@
 16 | 2017年6月8日  | 软件框架等，包括但不限于:  |
    |               | 前端: Bootstrap/jQuery (梁晶晶) |
    |               | Java: Struts/Spring/Hibernate (娄一翎) |
-   |               | Ruby: Rails (李博远)  |
+   |               | 敏捷开发方法 (李博远)  |
    |               | Python: Zope2/Web.py/Django/Tornado    |
    |               | .Net   |
-   |               | 敏捷开发方法  |
 17 | 2017年6月15日 | 考试周  <!--[Sample](slides/sample.pdf)--> |
 
 ---
