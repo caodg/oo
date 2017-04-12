@@ -21,7 +21,7 @@
    |               | 读书报告: TiU Chap8 (华晨彦) |
    |               | 读书报告: TiU Chap9.1-9.4 (谭鑫) |
    |               | 读书报告: TiU Chap9.5-9.8 (王春柳) |
-07 | 2017年4月6日  | UML建模工具       | 
+07 | 2017年4月6日  | [UML建模工具](slides/UML-tools-czc.pptx) | 
 08 | 2017年4月13日 | 需求分析 | [作业5](assign.md#assign5)
    |               | 读书报告: TiU Chap10 (昝妍) |
    |               | 读书报告: OOAD Chap5 (梁晶晶) |
