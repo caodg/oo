@@ -18,6 +18,5 @@ F(A) | 1601111303  | _**来雨轩**_| 1601111303 AT  pku.edu.cn | [GitHub](https
   | F           | 赖辉源| huiyuanlai AT qq.com   | [GitHub](https://github.com/llandll/OO-Course)
 G(F) | F           | _**王春柳**_| 2385878750 AT qq.com    | [GitHub](https://github.com/wcl199343/OO-Course)
   | F           | 孙熙然| sunxiran0505 AT 163.com   | [GitHub](https://github.com/JosephineSun/OOCOURSE)
-? | 1501110193  | 张立涵| 1501110193 AT  pku.edu.cn | GitHub
 
 G(F)表示你是甲方G，提出甲方需求。同时，你作为开发人员乙方，要完成的系统是由F组提出的，也就是说F组是G组的甲方。
