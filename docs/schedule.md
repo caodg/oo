@@ -54,8 +54,7 @@
    |               | Java: Struts/Spring/Hibernate (娄一翎) |
    |               | 敏捷开发方法 (李博远)  |
    |               | Python: Web.py/Django/Tornado (暂研)   |
-16 | 2017年6月8日  | 第二轮验收, [项目总结](assign.md#assign9)  |
-   |               | 甲方总结(5分钟), 乙方技术总结(每人8分钟)  |
+16 | 2017年6月8日  | 第二轮验收  |[项目总结](assign.md#assign9) 
    |               |   |
 17 | 2017年6月15日 | 考试周  <!--[Sample](slides/sample.pdf)--> |
 
