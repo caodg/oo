@@ -17,7 +17,7 @@ copyright: "&#169; <a href='http://sei.pku.edu.cn/~caodg/'>Donggang Cao</a>"
 repo_url: https://github.com/caodg/oo
 repo_name: GitHub
 
-theme: flatly
+theme_dir: cosmo
 
 extra_css:
  - css/extra.css
@@ -26,7 +26,6 @@ extra:
   site_url: "http://sei.pku.edu.cn/~caodg" 
 
 markdown_extensions:
- - nl2br
  - admonition
 
 dev_addr: 127.0.0.1:9090
