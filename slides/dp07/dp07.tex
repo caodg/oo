@@ -1,0 +1,666 @@
+\documentclass[compress]{beamer}
+
+\usepackage[nofonts]{ctex}
+\setCJKmainfont[ItalicFont={Kaiti SC}]{Kaiti SC}%
+%\setCJKmainfont[ItalicFont={AR PL KaitiM GB}]{AR PL KaitiM GB}%
+%\setCJKsansfont{WenQuanYi Zen Hei}% 文泉驿的黑体
+
+\mode<beamer>
+{
+     \useinnertheme{rectangles}
+     %\useoutertheme{infolines}
+     %\useoutertheme{split}
+     \usecolortheme{rose}
+     \usecolortheme{seahorse}
+
+     \setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+%     \expandafter\def\expandafter\insertshorttitle\expandafter{%
+%     \insertshorttitle\hfill%
+%     \insertframenumber\,/\,\inserttotalframenumber}
+}
+
+\defbeamertemplate*{footline}{mytheme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+  \hspace*{6ex}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\usebeamertemplate{mytheme}
+
+\setbeamertemplate{headline}{}
+
+%\setbeamercovered{transparent}
+
+\mode<handout>
+{
+	\usetheme{default}
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,landscape,border shrink=5mm]
+}
+
+
+\usepackage{amsmath,latexsym,amssymb,amsfonts,amsbsy}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{textpos}
+\usepackage{ulem}
+\usepackage{comment}
+\usepackage{fancyvrb}
+\fvset{frame=single, numbers=left, fontsize=\small}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta, graphs, trees, shapes, positioning, decorations.markings, intersections, decorations.text}
+\usepackage{tikz-uml}
+
+\newcommand{\romannumber}[1]{{\textrm{\uppercase\expandafter{\romannumeral
+#1}}}}
+
+\newcommand{\textblue}[1]{\textcolor{blue}{#1}}
+
+\setbeamercolor{dblue}{fg=white,bg=gray!70!blue} % for beamercolorbox
+ \newenvironment{pblock}{\begin{beamercolorbox}[rounded=true,
+          shadow=false]{dblue}}{\end{beamercolorbox}}
+ \newenvironment{bblock}{\begin{beamercolorbox}[rounded=true,
+          shadow=false]{fg=black, bg=white}}{\end{beamercolorbox}}
+
+\graphicspath{{figure/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    body                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%\AtBeginSubsection[]
+\AtBeginSection[]
+{ 
+    \begin{frame}<beamer> 
+		\frametitle{内容提要} 
+		\tableofcontents[currentsection,currentsubsection] 
+	\end{frame} 
+} 
+
+					
+\title[迭代器与组合]{面向对象设计模式 ~~ 迭代器与组合}
+
+\author[曹东刚]
+{曹东刚\\\href{mailto:caodg@pku.edu.cn}{caodg@pku.edu.cn}}
+
+\institute[北京大学]{北京大学信息学院研究生课程 - 面向对象的分析与设计 \\
+    \href{http://sei.pku.edu.cn/~caodg/course/oo}{http://sei.pku.edu.cn/\~{}caodg/course/oo}}
+
+\date{}
+
+\titlegraphic{\includegraphics[height=0.10\textwidth]{Overlays/logo.pdf}}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\setcounter{framenumber}{0}
+
+%\includeonlyframes{current}
+
+\begin{frame}
+  \frametitle{问题的提出}
+  有很多种方法可以把对象堆起来形成一个集合(collection)，如数组、堆栈、列
+  表或散列表等。\\[3ex]
+
+  \alert{问题：}如何遍历集合中的对象，而无需关心集合的具体实现？ \\[3ex]
+
+  \framebox{\parbox{0.9\hsize}{\centering \textblue{答案}：迭代器模式(Iterator
+  Pattern)}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{例：处理分别由数组和ArrayList实现的遗产系统}
+  \alert{需求}：某遗产系统有两个构件，一个处理早餐订餐业务，一个处理午餐订餐业务，分别
+  用ArrayList和数组记录菜单项。现在要实现一个统一的订餐系统，要求能够按
+  照顾客的要求打印出定制的菜单，应如何设计？ \\[2ex]
+  \alert{难点}：程序员不希望改变两个构件的现有存储方式，因为改动的代价太
+  大\\[2ex]
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{现有系统：相同的MenuItem}
+\begin{Verbatim}[label=早餐和午餐订餐系统的菜单项是相同的]
+public class MenuItem { 
+  String name;
+  String description; 
+  boolean vegetarian; 
+  double price;
+  pubic MenuItem(String name, String description,
+    boolean vegetarian, double price){ //init
+  }
+  public String getName() { return name; }
+  public String getDescription() { return description; }
+  public double getPrice() { return price; }
+  public boolean isVegetarian() { return vegetarian; } 
+}
+\end{Verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{两个构件各自不同的遍历方法}
+\begin{Verbatim}[label=早餐项遍历需要使用ArrayList的size和get方法, 
+  commandchars=\\\^\$]
+\alert^ArrayList$ breakfastItems = breakfMenu.getMenuItems() ;
+for (int i = 0; i < breakfastItems.size(); i++) {
+  MenuItem menuItem = (MenuItem)breakfastItems.get(i); 
+}
+\end{Verbatim}
+
+\vspace*{3ex}
+
+\begin{Verbatim}[label=午餐项遍历需要使用数组的length字段和下标操作, 
+  commandchars=\\\^\$]
+\alert^MenuItem[]$ lunchItems = dinerMenu.getMenuItems() ;
+for (int i = 0; i < lunchItems.length; i++) {
+  MenuItem menuItem = lunchItems[i]; 
+}
+\end{Verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{两个构件不同的实现方式带来的问题}
+
+\begin{itemize}
+\item 统一订餐系统必须针对两个构件的具体实现编程，而不是针对接口
+\item 统一订餐系统需要知道每个菜单如何表达内部的菜单项集合细节，违反了封装原则
+\end{itemize}
+
+  \textblue{如何解决}：
+\begin{enumerate}
+\item 让各个菜单实现一个相同的遍历内部元素的接口 
+  \item 将遍历（系统中变化的部分）封装
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{创建迭代器进行遍历}
+\begin{Verbatim}[label=遍历ArrayList] 
+Iterator iterator = breakfastMenu.createIterator(); 
+while (iterator.hasNext()) {
+  MenuItem menuItem = (MenuItem)iterator.next();
+}
+\end{Verbatim}
+\vspace*{3ex}
+\begin{Verbatim}[label=遍历数组] 
+Iterator iterator = lunchMenu.createIterator();
+while (iterator.hasNext()) {
+  MenuItem menuItem = (MenuItem)iterator.next(); 
+}
+\end{Verbatim}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{认识迭代器模式(Iterator Pattern)}
+\begin{tikzpicture}
+\tikzumlset{fill class=white}
+\umlclass[type=interface]{Iterator}{}{\umlvirt{hasNext()} \\
+  \umlvirt{next()}
+  }
+\umlclass[y=-4]{DinnerMenuIterator}{}{hasNext() \\
+  next()
+  }
+\umlimpl{DinnerMenuIterator}{Iterator}
+\umlnote[x=5]{Iterator}{定义了访问集合中元素的接口}
+\umlnote[y=-4, x=5]{DinnerMenuIterator}{具体的对象集合知道如何遍历自己的元素}
+\end{tikzpicture}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{在餐厅菜单中加入迭代器}
+   \renewcommand{\baselinestretch}{1.2}
+\begin{Verbatim}[label=晚餐菜单迭代器：遍历数组]
+public class DinerMenuIterator implements Iterator { 
+  MenuItem[] items;
+  int position = 0;
+  public Object next() {
+    MenuItem menuItem = items[position]; 
+    position = position + 1;
+    return menuItem;
+  }
+  public boolean hasNext() {
+    if (position >= items.length || items[position] == null) 
+      return false; 
+    else 
+      return true; 
+￼￼}
+\end{Verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{改写晚餐菜单}
+\begin{Verbatim}[commandchars=\\\^\$]
+public class DinerMenu implements Menu { 
+  static final int MAX_ITEMS = 6;
+  int numberOfItems = 0;
+  MenuItem[] menuItems;
+  \sout^public MenuItem[] getMenuItems() {$
+    \sout^return menuItems;$
+  \sout^}$
+  \uline^public Iterator createIterator() {$
+    \uline^return new DinerMenuIterator(menuItems);$
+  \uline^}$
+  // other methods here 
+}
+\end{Verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{设计的类图}
+\scalebox{0.85}{
+\begin{tikzpicture}
+\tikzumlset{fill class=white}
+
+\umlclass{Waitress}{}{printMenu()}
+\umlclass[x=-4,y=1.5]{BreakfastMenu}{menuItems}{createIterator()}
+\umlclass[x=-4,y=-1.5]{DinerMenu}{menuItems}{createIterator()}
+
+\umlclass[x=4, type=abstract]{Iterator}{}{\umlvirt{hasNext()} \\
+  \umlvirt{next()}}
+\umlclass[x=4, y=3.2]{BreakfastMenuIterator}{}{hasNext() \\
+  next()}
+\umlclass[x=4, y=-3.2]{DinerMenuIterator}{}{hasNext() \\
+  next()}
+\umlimpl{BreakfastMenuIterator}{Iterator}
+\umlimpl{DinerMenuIterator}{Iterator}
+
+\umluniassoc{Waitress}{Iterator}
+\umluniassoc{Waitress}{BreakfastMenu}
+\umluniassoc{Waitress}{DinerMenu}
+
+\umluniassoc[geometry=|-]{DinerMenu}{DinerMenuIterator}
+\umluniassoc[geometry=|-]{BreakfastMenu}{BreakfastMenuIterator}
+\end{tikzpicture}
+}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Java中的迭代器java.util.Iterator}
+
+\begin{center}
+\begin{tikzpicture}
+\umlclass[fill=white, type=interface]{Iterator}{}{\umlvirt{hasNext()} \\
+  \umlvirt{next()} \\
+  \textblue{\umlvirt{remove()}} }
+
+\umlnote[x=6, width=6cm]{Iterator}{
+~remove()~方法是可选的，如果不打算支持，可以直接扔出异常：
+~java.lang.UnsupportedOperationException~
+}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{改进的设计：使用JDK的Iterator}
+\only<1>{
+\scalebox{0.70}{
+\begin{tikzpicture}
+\tikzumlset{fill class=white}
+
+\umlclass{Waitress}{}{printMenu()}
+\umlclass[x=-4, type=interface]{Menu}{}{\umlvirt{createIterator()}}
+\umlclass[x=-4,y=3.7]{BreakfastMenu}{menuItems}{createIterator()}
+\umlclass[x=-4,y=-3.7]{DinerMenu}{menuItems}{createIterator()}
+\umlimpl{BreakfastMenu}{Menu}
+\umlimpl{DinerMenu}{Menu}
+
+\umlclass[x=4, type=abstract]{Iterator}{}{\umlvirt{hasNext()} \\
+  \umlvirt{next()} \\
+  \umlvirt{remove()}}
+\umlclass[x=4, y=3.7, fill=gray!20]{BreakfastMenuIterator}{}{hasNext() \\
+  next() \\
+  remove()}
+\umlclass[x=4, y=-3.7]{DinerMenuIterator}{}{hasNext() \\
+  next() \\
+  remove()}
+\umlimpl{BreakfastMenuIterator}{Iterator}
+\umlimpl{DinerMenuIterator}{Iterator}
+
+\umluniassoc{Waitress}{Iterator}
+\umluniassoc{Waitress}{Menu}
+
+\umluniassoc{DinerMenu}{DinerMenuIterator}
+%\umluniassoc{BreakfastMenu}{BreakfastMenuIterator}
+
+\end{tikzpicture}
+}
+}
+
+\only<2>{
+\scalebox{0.80}{
+\begin{tikzpicture}
+\tikzumlset{fill class=white}
+
+\umlclass{Waitress}{}{printMenu()}
+\umlclass[x=-4, type=interface]{Menu}{}{\umlvirt{createIterator()}}
+\umlclass[x=-4,y=3.2]{BreakfastMenu}{menuItems}{createIterator()}
+\umlclass[x=-4,y=-3.7]{DinerMenu}{menuItems}{createIterator()}
+\umlimpl{BreakfastMenu}{Menu}
+\umlimpl{DinerMenu}{Menu}
+
+\umlclass[x=4, type=abstract]{Iterator}{}{\umlvirt{hasNext()} \\
+  \umlvirt{next()} \\
+  \umlvirt{remove()}}
+\umlclass[x=4, y=-3.7]{DinerMenuIterator}{}{hasNext() \\
+  next() \\
+  remove()}
+\umlimpl{DinerMenuIterator}{Iterator}
+
+\umluniassoc{Waitress}{Iterator}
+\umluniassoc{Waitress}{Menu}
+
+\umluniassoc{DinerMenu}{DinerMenuIterator}
+
+\umlnote[x=1, y=3.2, width=4cm]{BreakfastMenu}{menuItems是ArrayList，可以直接使用Java的内置Iterator}
+\end{tikzpicture}
+}
+}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{定义迭代器模式}
+  \only<1> {
+  \begin{block}{迭代器模式(Iterator Pattern)}
+    迭代器模式提供了一种方法，能够顺序访问一个集合对象中的各个元素，而又
+    不暴露其内部实现细节
+  \end{block}
+
+  \vspace*{2ex}
+  将\uline{遍历集合中的元素}这件任务交给Iterator，而不是交给集合，简化了集合类的设计，并使得各自的责任明确
+  }
+
+  \only<2> {
+    \noindent\begin{tikzpicture}
+      \tikzumlset{fill class=white}
+      \umlemptyclass{Client}
+      \umlclass[x=3.5, type=interface]{Iterator}{}{\umlvirt{hasNext()} \\
+        \umlvirt{next()} \\
+        \umlvirt{remove()} 
+      }
+      \umlclass[x=3.5, y=-4]{ConcreteIterator}{}{hasNext() \\
+        next() \\
+        remove() 
+      }
+      \umlclass[x=-4,
+      type=interface]{Aggregate}{}{\umlvirt{createIterator()}}
+      \umlclass[x=-4, y=-4]{ConcreteAggregate}{}{createIterator()}
+
+      \umlimpl{ConcreteAggregate}{Aggregate}
+      \umlimpl{ConcreteIterator}{Iterator}
+      \umluniassoc{Client}{Aggregate}
+      \umluniassoc{Client}{Iterator}
+      \umluniassoc{ConcreteAggregate}{ConcreteIterator}
+
+    \end{tikzpicture}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{设计原则：单一责任(Single Responsibility)}
+  \begin{block}{单一责任原则}
+    一个类应该只有一个引起变化的原因
+  \end{block}
+
+\vspace*{2ex}
+
+\begin{itemize}
+\item \uline{管理}集合里的元素和\uline{遍历}所有元素是\uwave{两件事}
+\item 类所承担的每个责任都是潜在的代码变动源头。多个责任意味着多个变动之处
+\item 每个类只应当承担单一责任
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{分析类的责任}
+\begin{tikzpicture}
+\tikzumlset{fill class=white}
+
+\umlclass{Game}{}{login() \\
+  signup() \\
+  move() \\
+  fire() \\
+  rest() }
+\umlclass[x=3.5]{Person}{}{setName() \\
+  setAddress() \\
+  setPhoneNumber() \\
+  save() \\
+  load()}
+\umlclass[x=7.5]{DeckOfCards}{} {hasNext() \\
+  next() \\
+  remove() \\
+  addCard() \\
+  removeCard() \\
+  shuffle() }
+\end{tikzpicture}
+\end{frame}
+
+%\subsection{组合模式}
+
+\begin{frame}
+  \frametitle{新需求: 支持菜单中的菜单}
+
+\begin{tikzpicture} [
+    level distance=2cm,
+    level 1/.style={sibling distance=3.8cm},
+    level 2/.style={sibling distance=1.5cm},
+    level 3/.style={sibling distance=1.2cm},
+    edge from parent/.style={draw,-latex, shorten <=0.4cm}
+  ]
+
+  \tikzstyle{every node}=[circle,draw, thick, minimum size=0.6cm]
+
+  \node (Menu0) {}
+    child {
+      node (L1) {}
+        child { node (L1-0) [fill] {} }
+        child { node (L1-1) [fill] {} }
+    }
+    child {
+      node (L2) {}
+      child { node (L2-0) [fill] {} }
+      child { node (L2-1) [fill] {} }
+        child {
+          node (L2-2) {}
+            child { node (L2-2-0) [fill] {} }
+            child { node (L2-2-1) [fill] {} }
+          }
+    }
+    child {
+      node (L3)  {}
+      child { node (L3-1) [fill] {} }
+      child { node (L3-2) [fill] {} }
+    };
+
+    {
+    \scriptsize\bf
+    \draw[decoration={text along path, raise=-8pt, 
+        text={总菜单}, text align={center}},decorate] 
+        (Menu0.west) arc(180:360:0.3cm and 0.3cm);
+
+    \draw[decoration={text along path, raise=-8pt, 
+        text={餐厅菜单}, text align={center}},decorate] 
+        (L2.west) arc(180:360:0.3cm and 0.3cm);
+
+    \draw[decoration={text along path, raise=-8pt, 
+        text={甜点菜单}, text align={center}},decorate] 
+        (L2-2.west) arc(180:360:0.3cm and 0.3cm);
+    }
+    
+
+    {
+    \tiny\bf
+    \draw[decoration={text along path, raise=-8pt, 
+        text={煎饼屋菜单}, text align={center}},decorate] 
+        (L1.west) arc(-180:0:0.3cm and 0.3cm);
+
+    \draw[decoration={text along path, raise=-8pt, 
+        text={咖啡厅菜单}, text align={center}},decorate] 
+        (L3.west) arc(180:360:0.3cm and 0.3cm);
+    }
+
+    {
+    \tiny
+    \draw[decoration={text along path, raise=-8pt, 
+        text={菜单项}, text align={center}},decorate] 
+        (L1-0.west) arc(180:360:0.3cm and 0.3cm);
+    \draw[decoration={text along path, raise=-8pt, 
+        text={菜单项}, text align={center}},decorate] 
+        (L1-1.west) arc(180:360:0.3cm and 0.3cm);
+    \draw[decoration={text along path, raise=-8pt, 
+        text={菜单项}, text align={center}},decorate] 
+        (L3-1.west) arc(180:360:0.3cm and 0.3cm);
+    \draw[decoration={text along path, raise=-8pt, 
+        text={菜单项}, text align={center}},decorate] 
+        (L3-2.west) arc(180:360:0.3cm and 0.3cm);
+    \draw[decoration={text along path, raise=-8pt, 
+        text={菜单项}, text align={center}},decorate] 
+        (L2-0.west) arc(180:360:0.3cm and 0.3cm);
+    \draw[decoration={text along path, raise=-8pt, 
+        text={菜单项}, text align={center}},decorate] 
+        (L2-1.west) arc(180:360:0.3cm and 0.3cm);
+    \draw[decoration={text along path, raise=-8pt, 
+        text={菜单项}, text align={center}},decorate] 
+        (L2-2-0.west) arc(180:360:0.3cm and 0.3cm);
+    \draw[decoration={text along path, raise=-8pt, 
+        text={菜单项}, text align={center}},decorate] 
+        (L2-2-1.west) arc(180:360:0.3cm and 0.3cm);
+    }
+
+\end{tikzpicture}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{定义组合模式}
+  \only<1> {
+  \begin{block}{组合模式(Composite Pattern)}
+      组合模式允许讲对象组合成树型结构来表现``整体－部分''层次结构，支持
+      客户以一致的方式处理个别对象与组合对象
+  \end{block}
+
+  \vspace*{2ex}
+  使用\uline{组合结构}，可以把相同的操作应用在组合对象和个别对象上，即在
+  大多数情况下，可以\textcolor{red}{\uline{忽略}}组合对象和个别对象之间的差别
+  }
+
+  \only<2> {
+
+\scalebox{0.85}{
+    \noindent\begin{tikzpicture}
+      \tikzumlset{fill class=white}
+      \umlemptyclass{Client}
+      \umlclass[x=5, type=abstract]{Component}{}{\umlvirt{operation()} \\
+        \umlvirt{add(Component)} \\
+        \umlvirt{remove(Component)} \\
+        \umlvirt{get(int)}} 
+      \umlclass[x=1, y=-5]{Leaf}{}{operation()}
+      \umlclass[x=6, y=-5]{Composite}{}{
+        operation() \\
+        add(Component) \\
+        remove(Component) \\
+        get(int)} 
+        
+
+      \umlinherit{Leaf}{Component}
+      \umlinherit{Composite}{Component}
+      \umluniassoc{Client}{Component}
+      \umlHVHaggreg[arm1=3cm] {Composite}{Component}
+
+    \end{tikzpicture}
+}
+}
+\end{frame}
+
+\begin{frame}
+    \frametitle{利用组合模式设计菜单}
+\noindent\scalebox{0.85}{
+    \begin{tikzpicture}
+      \tikzumlset{fill class=white}
+      \umlemptyclass{Waitress}
+      \umlclass[x=4, y=-2, type=abstract]{MenuComponent}{}{\umlvirt{getName()} \\
+        \umlvirt{getDescription()} \\
+        \umlvirt{getPrice()} \\
+        \umlvirt{add(Component)} \\
+        \umlvirt{remove(Component)} \\
+        isVegetarian() \\
+        print() \\
+        getChild(int)
+        } 
+        \umlclass[x=0, y=-5]{MenuItem}{}{\umlvirt{getName()} \\
+            \umlvirt{getDescription()} \\
+            \umlvirt{getPrice()} \\
+            isVegetarian() \\
+            print() 
+        }
+            
+        \umlclass[x=9, y=-5]{Menu}{}{ \umlvirt{getName()} \\
+            \umlvirt{getDescription()} \\
+            \umlvirt{getPrice()} \\
+            print()  \\
+            add(Component) \\
+            remove(Component) \\
+            getChild(int)} 
+
+      \umlinherit{MenuItem}{MenuComponent}
+      \umlinherit{Menu}{MenuComponent}
+      \umluniassoc{Waitress}{MenuComponent}
+      \umlHVaggreg[arm1=-3cm, anchor1=210] {Menu}{MenuComponent}
+
+    \end{tikzpicture}
+}
+\end{frame}
+
+\begin{frame}
+    \frametitle{实现组合菜单}
+    留作一个练习
+\end{frame}
+
+\begin{frame}
+    \frametitle{将组合模式和迭代器结合}
+    留作一个练习
+\end{frame}
+
+\begin{frame}
+\frametitle{关于迭代器和组合模式的小结}
+\begin{itemize}
+\item 迭代器使得无需了解集合的内部结构即可遍历集合的元素
+\item 迭代器将对集合的遍历进行了封装
+\item 迭代器将集合遍历的任务从集合分离
+\item 迭代器提供了一个遍历集合的公共接口，允许客户利用多态机制编写代码使用集合的元素
+\item 程序员应当尽量让类只承担唯一的责任
+\item 组合模式提供一种结构，可同时包容个别对象和组合对象
+\item 组合模式允许以一致的方式处理个别对象和组合对象
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{关于设计原则的小结}
+  \begin{enumerate}
+    \item 封装变化
+    \item 多用聚合、少用继承
+    \item 针对接口编程，不针对实现编程
+    \item 尽最大可能将要交互的对象设计为松耦合的
+    \item 对扩展开放，对修改封闭
+    \item 依赖抽象，不要依赖具体类
+    \item 只和朋友交谈
+    \item 别找我，我会找你
+    \item 类应该只有一个引起改变的理由
+  \end{enumerate}
+\end{frame}
+
+\end{document}
