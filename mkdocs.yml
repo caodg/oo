@@ -2,7 +2,7 @@ site_name: OO Course
 site_author: "Donggang Cao"
 site_description: "OO Analysis and Design"
 
-pages:
+nav:
 - Home: index.md
 - Intro: intro.md
 - History: 
@@ -17,7 +17,9 @@ copyright: "&#169; <a href='http://sei.pku.edu.cn/~caodg/'>Donggang Cao</a>"
 repo_url: https://github.com/caodg/oo
 repo_name: GitHub
 
-theme_dir: cosmo
+theme: 
+    name: cosmo
+    custom_dir: cosmo
 
 extra_css:
  - css/extra.css

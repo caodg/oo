@@ -7,7 +7,7 @@
 
 序号 | 时间  |  内容 | 作业
 -- | --- | ---------- | ----
-01 | 2017年2月23日 | [课程介绍](slides/chap00.pdf) | [作业1](assign.md#assign1)
+01 | 2017年2月23日 | [课程介绍](https://caodg.github.io/oo/slides/chap00.pdf) | [作业1](assign.md#assign1)
 02 | 2017年3月2日  | 不同的分析设计方法  |
 03 | 2017年3月9日  | 课程设计 | [作业2第一轮](assign.md#assign2)
 04 | 2017年3月16日 | 案例讨论 | [作业2第二轮](assign.md#assign2)
@@ -21,7 +21,7 @@
    |               | 读书报告: TiU Chap8 (华晨彦) |
    |               | 读书报告: TiU Chap9.1-9.4 (谭鑫) |
    |               | 读书报告: TiU Chap9.5-9.8 (王春柳) |
-07 | 2017年4月6日  | [UML建模工具](slides/UML-tools-czc.pptx) | 
+07 | 2017年4月6日  | [UML建模工具](https://caodg.github.io/oo/slides/UML-tools-czc.pptx) | 
 08 | 2017年4月13日 | 需求分析 | [作业5](assign.md#assign5)
    |               | 读书报告: TiU Chap10 (昝妍) |
    |               | 读书报告: OOAD Chap5 (梁晶晶) |
@@ -64,14 +64,14 @@
 
 序号 | 内容 
 -- | ---------- 
-01 | [面向对象方法概论](slides/chap01.pdf)
-02 | [不同的分析与设计方法](slides/chap02.pdf)
-03 | [建立需求模型, 定义对象类](slides/chap03.pdf)
-04 | [定义对象间的关系](slides/chap04.pdf)
-05 | [对象间的关系2](slides/chap05.pdf)
-06 | [建立辅助模型](slides/chap06.pdf)
-07 | [面向对象的设计1](slides/chap07.pdf)
-08 | [面向对象的设计2](slides/chap08.pdf)
+01 | [面向对象方法概论](https://caodg.github.io/oo/slides/chap01.pdf)
+02 | [不同的分析与设计方法](https://caodg.github.io/oo/slides/chap02.pdf)
+03 | [建立需求模型, 定义对象类](https://caodg.github.io/oo/slides/chap03.pdf)
+04 | [定义对象间的关系](https://caodg.github.io/oo/slides/chap04.pdf)
+05 | [对象间的关系2](https://caodg.github.io/oo/slides/chap05.pdf)
+06 | [建立辅助模型](https://caodg.github.io/oo/slides/chap06.pdf)
+07 | [面向对象的设计1](https://caodg.github.io/oo/slides/chap07.pdf)
+08 | [面向对象的设计2](https://caodg.github.io/oo/slides/chap08.pdf)
 
 ---
 
@@ -79,11 +79,11 @@
 
 序号 | 内容 
 -- | ---------- 
-01 | [策略模式](slides/dp00.pdf) 
-02 | [观察者模式](slides/dp01.pdf)
-03 | [装饰者模式](slides/dp02.pdf) 
-04 | [工厂模式](slides/dp03.pdf)
-05 | [单件](slides/dp04.pdf)
-06 | [适配器与外观](slides/dp05.pdf)
-07 | [模板](slides/dp06.pdf)
-08 | [迭代器与组合](slides/dp07.pdf)
+01 | [策略模式](https://caodg.github.io/oo/slides/dp00.pdf) 
+02 | [观察者模式](https://caodg.github.io/oo/slides/dp01.pdf)
+03 | [装饰者模式](https://caodg.github.io/oo/slides/dp02.pdf) 
+04 | [工厂模式](https://caodg.github.io/oo/slides/dp03.pdf)
+05 | [单件](https://caodg.github.io/oo/slides/dp04.pdf)
+06 | [适配器与外观](https://caodg.github.io/oo/slides/dp05.pdf)
+07 | [模板](https://caodg.github.io/oo/slides/dp06.pdf)
+08 | [迭代器与组合](https://caodg.github.io/oo/slides/dp07.pdf)
